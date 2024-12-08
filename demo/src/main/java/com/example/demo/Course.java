@@ -34,17 +34,17 @@ public class Course implements IGeneric {
     }
 
     @Override
-    public Object add() {
+    public Course add() {
         return null;
     }
 
     @Override
-    public Object remove() {
+    public Course remove() {
         return null;
     }
 
     @Override
-    public Object update(Course course) {
+    public Course update() {
         return null;
     }
 
