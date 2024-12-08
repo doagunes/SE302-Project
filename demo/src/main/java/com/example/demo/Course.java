@@ -44,11 +44,7 @@ public class Course implements IGeneric {
     }
 
     @Override
-<<<<<<< HEAD
     public Course update(Object obj) {
-=======
-    public Course update() {
->>>>>>> main
         return null;
     }
 
