@@ -13,7 +13,7 @@ public class Lecturer extends Person {
     }
 
     @Override
-    public Lecturer update() {
+    public Lecturer update(Object obj) {
         return null;
     }
 }
