@@ -12,7 +12,7 @@ public class Student extends Person{
     }
 
     @Override
-    public Student update() {
+    public Student update(Object obj) {
         return null;
     }
 

@@ -33,7 +33,7 @@ public class Classroom implements IGeneric {
     }
 
     @Override
-    public Classroom update() {
+    public Classroom update(Object obj) {
         return null;
     }
 }
