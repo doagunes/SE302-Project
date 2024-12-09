@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class CourseDataAccessObject {
 
@@ -24,18 +25,21 @@ public class CourseDataAccessObject {
         }
     }
 
-    public void addCourse(String course, String timeToStart, int duration, String lecturer, String students){
+    public void addCourse(ArrayList<Course> courses){
 
         createTable();
         String sql = "INSERT INTO Course(Course, TimeToStart, DurationInLectureHours, Lecturer, Students) VALUES (?, ?, ?, ?, ?)";
         try(Connection conn = DatabaseConnection.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
-            pstmt.setString(1, course);
-            pstmt.setString(2, timeToStart);
-            pstmt.setInt(3, duration);
-            pstmt.setString(4, lecturer);
-            pstmt.setString(5, students);
-            pstmt.executeUpdate();
+            for(Course course : courses){
+                pstmt.setString(1, course.getCourseID());
+                pstmt.setString(2, course.getTimeToStart());
+                pstmt.setInt(3, course.getDuration());
+                pstmt.setString(4, course.getLecturerName());
+                String studentsAsString = String.join(",", course.getStudentNames());
+                pstmt.setString(5, studentsAsString);
+                pstmt.executeUpdate();
+            }
 
         } catch (Exception e) {
             throw new RuntimeException(e);
