@@ -4,8 +4,29 @@ import java.sql.*;
 
 public class CourseDataAccessObject {
 
+    private void createTable() {
+        String sql = """
+            CREATE TABLE IF NOT EXISTS Course (
+                              Course TEXT NOT NULL,
+                              TimeToStart TEXT NOT NULL,
+                              DurationInLectureHours INTEGER NOT NULL,
+                              Lecturer TEXT NOT NULL,
+                              Students TEXT NOT NULL
+                          );
+        """;
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
+            System.out.println("Course table has just created or it already exists.");
+        } catch (SQLException e) {
+            System.out.println("Creating table error: " + e.getMessage());
+        }
+    }
+
     public void addCourse(String course, String timeToStart, int duration, String lecturer, String students){
 
+        createTable();
         String sql = "INSERT INTO Course(Course, TimeToStart, DurationInLectureHours, Lecturer, Students) VALUES (?, ?, ?, ?, ?)";
         try(Connection conn = DatabaseConnection.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
