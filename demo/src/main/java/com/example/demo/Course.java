@@ -38,7 +38,7 @@ public class Course implements IGeneric {
          */
         String[] timeParts = timeToStart.split(" ");
         this.courseDay = timeParts[0];
-        this.startTime = LocalTime.parse(timeParts[1], DateTimeFormatter.ofPattern("HH:mm"));
+        this.startTime = LocalTime.parse(timeParts[1], DateTimeFormatter.ofPattern("H:mm"));
         this.endTime = this.getEndTime(startTime);
 
         //TODO Person için gerekli olan bütün attributelar sağlandıtan sonra Student ve Lecturer Objeleri oluşturulup Course Objesinin gerekli attributeları ile initialize edilmeli.
