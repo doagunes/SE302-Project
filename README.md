@@ -1,1 +1,1 @@
-# SE302-Project
+# Syllabus Manage
