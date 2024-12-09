@@ -2,6 +2,7 @@ package com.example.demo;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CourseDataAccessObject {
 
@@ -53,6 +54,9 @@ public class CourseDataAccessObject {
              ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
+                String studentsString = rs.getString("Students");
+                ArrayList<String> students = stringToArrayList(studentsString);
+
                 System.out.println("Course: " + rs.getString("Course") +
                         ", TimeToStart: " + rs.getString("TimeToStart") +
                         ", DurationInLectureHours: " + rs.getInt("DurationInLectureHours") +
@@ -63,5 +67,14 @@ public class CourseDataAccessObject {
         } catch (SQLException e) {
             System.out.println("Query error: " + e.getMessage());
         }
+    }
+    // Helper method to convert a comma-separated String to an ArrayList
+    private ArrayList<String> stringToArrayList(String students) {
+        ArrayList<String> studentList = new ArrayList<>();
+        if (students != null && !students.isEmpty()) {
+            // Virgülle ayrılmış String'i parçalayarak bir ArrayList'e çevir
+            studentList.addAll(Arrays.asList(students.split(",")));
+        }
+        return studentList;
     }
 }
