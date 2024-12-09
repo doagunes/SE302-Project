@@ -27,5 +27,19 @@ public class CSV_Reader {
 
         return students;
     }
+    public ArrayList<Classroom> readClassrooms () throws IOException {
+        ArrayList<Classroom> classrooms = new ArrayList<>();
+        String filePath = "demo/src/main/resources/csv_files/ClassroomCapacity.csv";
+        BufferedReader br = new BufferedReader(new FileReader(filePath));
+        String line;
+        br.readLine(); // Stepping first line because there is no data at the first line
+        while ((line = br.readLine()) != null) {
+            String[] data = line.split(";");
+            classrooms.add(new Classroom(data[0], Integer.parseInt(data[1])));
+
+        }
+        return classrooms;
+
+    }
 
 }
