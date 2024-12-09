@@ -10,13 +10,15 @@ public class Classroom implements IGeneric {
     private ArrayList<Boolean> availableList;
     private ArrayList<Course> courses;
 
-    public boolean isAvailable(LocalTime startTime, LocalTime endTime) {
+    public boolean isAvailable(String day, LocalTime startTime, LocalTime endTime) {
         for (Course course : courses) {
             LocalTime courseStartTime = course.getStartTime();
             LocalTime courseEndTime = course.getEndTime(courseStartTime);
-
-            if ((startTime.isBefore(courseEndTime) && endTime.isAfter(courseStartTime))) {
-                return false;
+            String courseDay = course.getCourseDay();
+            if (courseDay.equals(day)) {
+                if (startTime.isBefore(courseEndTime) && endTime.isAfter(courseStartTime)) {
+                    return false;
+                }
             }
         }
         return true;
