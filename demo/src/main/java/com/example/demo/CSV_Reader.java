@@ -9,25 +9,23 @@ public class CSV_Reader {
         String filePath = "demo/src/main/resources/csv_files/Courses.csv";
         BufferedReader br = new BufferedReader(new FileReader(filePath));
         String line;
+        br.readLine(); // Stepping first line because there is no data at the first line
         while ((line = br.readLine()) != null) {
-            String data[] = line.split(";");
-            courses.add(new Course(data[0], data[1], Integer.parseInt(data[2]), data[3], readStudents()));
+            String[] data = line.split(";");
+            courses.add(new Course(data[0], data[1], Integer.parseInt(data[2]), data[3], readStudents(data)));
 
         }
         return courses;
     }
-    public ArrayList<String> readStudents () throws  IOException {
+    public ArrayList<String> readStudents (String[] data) throws  IOException {
         ArrayList<String> students = new ArrayList<>();
         String filePath = "demo/src/main/resources/csv_files/Courses.csv";
         BufferedReader br = new BufferedReader(new FileReader(filePath));
-        String line;
-        while ((line = br.readLine()) != null) {
-            String studentsNames[] = line.split(";");
-            for (int i = 4;i<studentsNames.length;i++) {
-                students.add(studentsNames[i]);
-            }
+        for (int i = 4; i < data.length; i++) {
+            students.add(data[i]);
         }
-        return students;
 
+        return students;
     }
+
 }

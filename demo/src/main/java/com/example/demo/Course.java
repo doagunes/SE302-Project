@@ -73,4 +73,6 @@ public class Course implements IGeneric {
     public String getCourseDay() {
         return courseDay;
     }
+
+
 }
