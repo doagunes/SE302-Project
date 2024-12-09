@@ -1,1 +1,1 @@
-# Syllabus Manage
+# Syllabus Manager
