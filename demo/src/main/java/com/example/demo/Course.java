@@ -74,5 +74,91 @@ public class Course implements IGeneric {
         return courseDay;
     }
 
+    public String getCourseID() {
+        return courseID;
+    }
 
+    public void setCourseID(String courseID) {
+        this.courseID = courseID;
+    }
+
+    public String getTimeToStart() {
+        return timeToStart;
+    }
+
+    public void setTimeToStart(String timeToStart) {
+        this.timeToStart = timeToStart;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public String getLecturerName() {
+        return lecturerName;
+    }
+
+    public void setLecturerName(String lecturerName) {
+        this.lecturerName = lecturerName;
+    }
+
+    public ArrayList<String> getStudentNames() {
+        return studentNames;
+    }
+
+    public void setStudentNames(ArrayList<String> studentNames) {
+        this.studentNames = studentNames;
+    }
+
+    public void setCourseDay(String courseDay) {
+        this.courseDay = courseDay;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public Lecturer getLecturer() {
+        return lecturer;
+    }
+
+    public void setLecturer(Lecturer lecturer) {
+        this.lecturer = lecturer;
+    }
+
+    public Classroom getAssignedClassroom() {
+        return assignedClassroom;
+    }
+
+    public void setAssignedClassroom(Classroom assignedClassroom) {
+        this.assignedClassroom = assignedClassroom;
+    }
+
+    public ArrayList<Student> getEnrolledStudentsList() {
+        return enrolledStudentsList;
+    }
+
+    public void setEnrolledStudentsList(ArrayList<Student> enrolledStudentsList) {
+        this.enrolledStudentsList = enrolledStudentsList;
+    }
+
+    public ArrayList<Attendance> getAttendanceRecordList() {
+        return attendanceRecordList;
+    }
+
+    public void setAttendanceRecordList(ArrayList<Attendance> attendanceRecordList) {
+        this.attendanceRecordList = attendanceRecordList;
+    }
 }

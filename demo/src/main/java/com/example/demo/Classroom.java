@@ -34,6 +34,38 @@ public class Classroom implements IGeneric {
         return null;
     }
 
+    public String getClassroomName() {
+        return classroomName;
+    }
+
+    public void setClassroomName(String classroomName) {
+        this.classroomName = classroomName;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public ArrayList<Boolean> getAvailableList() {
+        return availableList;
+    }
+
+    public void setAvailableList(ArrayList<Boolean> availableList) {
+        this.availableList = availableList;
+    }
+
+    public ArrayList<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(ArrayList<Course> courses) {
+        this.courses = courses;
+    }
+
     @Override
     public Classroom remove() {
         return null;

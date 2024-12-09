@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class ClassroomDataAccessObject {
 
@@ -21,15 +22,17 @@ public class ClassroomDataAccessObject {
         }
     }
 
-    public void addClassroom(String classroom, int capacity){
+    public void addClassroom(ArrayList<Classroom> classrooms){
         createTable();
         String sql = "INSERT INTO Classroom (Classroom, Capacity) VALUES (?, ?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, classroom);
-            pstmt.setInt(2, capacity);
-            pstmt.executeUpdate();
-            System.out.println("Classroom added: " + classroom);
+            for (Classroom classroom : classrooms) {
+                pstmt.setString(1, classroom.getClassroomName());
+                pstmt.setInt(2, classroom.getCapacity());
+                pstmt.executeUpdate();
+            }
+            System.out.println("Classroom added: " + classrooms);
         } catch (SQLException e) {
             System.out.println("Adding error: " + e.getMessage());
         }
