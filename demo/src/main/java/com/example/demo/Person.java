@@ -7,4 +7,8 @@ public abstract class Person implements IGeneric {
     private int ID;
     private ArrayList<Course> courses;
 
+    public Person(String name) {
+        this.name = name;
+        this.courses = new ArrayList<>();
+    }
 }
