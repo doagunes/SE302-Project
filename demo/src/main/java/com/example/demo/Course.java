@@ -41,6 +41,14 @@ public class Course implements IGeneric {
         this.startTime = LocalTime.parse(timeParts[1], DateTimeFormatter.ofPattern("H:mm"));
         this.endTime = this.getEndTime(startTime);
 
+        // Use the static method to get the lecturer object (singleton)
+        this.lecturer = Lecturer.findLecturerByName(lecturerName);
+
+        // Create a list of students by finding each student using their names
+        this.enrolledStudentsList = new ArrayList<>();
+        for (String studentName : studentNames) {
+            enrolledStudentsList.add(Student.findStudentByName(studentName));
+        }
         //TODO Person için gerekli olan bütün attributelar sağlandıtan sonra Student ve Lecturer Objeleri oluşturulup Course Objesinin gerekli attributeları ile initialize edilmeli.
 
     }
