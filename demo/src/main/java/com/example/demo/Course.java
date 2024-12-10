@@ -5,6 +5,7 @@ import com.almasb.fxgl.core.collection.Array;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Course implements IGeneric {
     private String courseID;
@@ -48,6 +49,33 @@ public class Course implements IGeneric {
 
         //TODO Person için gerekli olan bütün attributelar sağlandıtan sonra Student ve Lecturer Objeleri oluşturulup Course Objesinin gerekli attributeları ile initialize edilmeli.
 
+    }
+    //TODO Bu metod csv reader ile uyumlu olmayabilir kontrol edilecek sonradan.
+    public void assignClassroom(ArrayList<Classroom> classrooms) {
+        int studentCount = this.getStudentNames().size();
+        String courseDay = this.courseDay;
+        LocalTime startTime = this.startTime;
+        LocalTime endTime = this.endTime;
+
+        // Kapasiteye göre sıralama, doluluk durumuna göre filtreleme
+        Classroom selectedClassroom = classrooms.stream()
+                .filter(classroom -> classroom.getCapacity() > studentCount)
+                // Sınıfları, kullanım sıklığına göre azdan çoğa sıralıyoruz
+                .sorted(Comparator.comparingInt((Classroom classroom) -> classroom.getCourses().size()) // Az kullanılan sınıflar önce gelsin
+                        .thenComparingInt(classroom -> classroom.getCapacity())) // Ardından kapasiteye göre sıralama
+                // Çakışmaları kontrol et
+                .filter(classroom -> classroom.isAvailable(courseDay, startTime, endTime))
+                .skip(1)  // İlk sınıfı atla, 2. en uygun sınıfı seçersek sınıfta boşluk kalır.
+                .findFirst()
+                .orElse(null);
+
+        if (selectedClassroom != null) {
+            this.assignedClassroom = selectedClassroom;
+            selectedClassroom.getCourses().add(this);
+            System.out.println("Classroom assigned: " + selectedClassroom.getClassroomName());
+        } else {
+            System.out.println("No suitable classroom found for course: " + this.courseID);
+        }
     }
 
     public Lecturer createLecturer(String lecturerName) {
