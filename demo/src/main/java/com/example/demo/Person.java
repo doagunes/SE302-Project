@@ -11,4 +11,16 @@ public abstract class Person implements IGeneric {
         this.name = name;
         this.courses = new ArrayList<>();
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public ArrayList<Course> getCourses() {
+        return courses;
+    }
 }
