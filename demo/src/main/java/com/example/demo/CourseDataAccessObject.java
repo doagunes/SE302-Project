@@ -7,30 +7,13 @@ import java.util.Arrays;
 public class CourseDataAccessObject {
 
     public void createTable() {
-
-        /*
-        String sql2 = "DROP TABLE IF EXISTS Course";
-        try (Connection conn = DatabaseConnection.getConnection();
-             Statement stmt = conn.createStatement()) {
-            stmt.execute(sql2);
-            System.out.println("Classroom table has just created or it already exists.");
-        } catch (SQLException e) {
-            System.out.println("Creating table error: " + e.getMessage());
-        }
-
-         */
-
-
-
-
         String sql = """
             CREATE TABLE IF NOT EXISTS Course (
-                              Course TEXT NOT NULL ,
+                              Course TEXT NOT NULL UNIQUE ,
                               TimeToStart TEXT NOT NULL,
                               DurationInLectureHours INTEGER NOT NULL,
                               Lecturer TEXT NOT NULL,
-                              Students TEXT NOT NULL,
-                              UNIQUE (Course,TimeToStart, DurationInLectureHours, Lecturer, Students)\s
+                              Students TEXT NOT NULL\s
                          );
         \s""";
 
@@ -59,7 +42,7 @@ public class CourseDataAccessObject {
                 pstmt.executeUpdate();
             }
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
