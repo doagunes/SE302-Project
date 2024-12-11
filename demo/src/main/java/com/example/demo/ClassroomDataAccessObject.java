@@ -6,12 +6,10 @@ import java.util.ArrayList;
 public class ClassroomDataAccessObject {
 
     public void createTable() {
-
         String sql = """
             CREATE TABLE IF NOT EXISTS Classroom (
-                Classroom TEXT NOT NULL ,
-                Capacity INTEGER NOT NULL ,
-                UNIQUE (Classroom, Capacity)  \s           
+                Classroom TEXT NOT NULL UNIQUE ,
+                Capacity INTEGER NOT NULL \s
             );
        \s""";
         try (Connection conn = DatabaseConnection.getConnection();
