@@ -6,7 +6,6 @@ import java.util.Map;
 
 public class Lecturer extends Person {
     private static Map<String, Lecturer> lecturersByName = new HashMap<>();
-    private ArrayList<Course> courses;
 
     private Lecturer(String name) {
         super(name);
@@ -23,7 +22,7 @@ public class Lecturer extends Person {
     }
 
     public void addStudentToCourse(Course course,Student std){
-        for(Course c : courses){
+        for(Course c : super.getCourses()){
             if(c.getCourseID() == course.getCourseID()){
                 ArrayList<Student> stdList  = c.getEnrolledStudentsList();
                 stdList.add(std);
@@ -31,8 +30,8 @@ public class Lecturer extends Person {
         }
     }
 
-    public void removeStudentToCourse(Course course,Student std){
-        for(Course c : courses){
+    public void removeStudentFromCourse(Course course,Student std){
+        for(Course c : super.getCourses()){
             if(c.getCourseID() == course.getCourseID()){
                 ArrayList<Student> stdList  = c.getEnrolledStudentsList();
                 for(Student s : stdList){
