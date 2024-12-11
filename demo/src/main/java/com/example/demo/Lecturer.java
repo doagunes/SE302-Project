@@ -21,14 +21,10 @@ public class Lecturer extends Person {
     }
 
     @Override
-    public Lecturer add() {
-        return null;
-    }
+    public void add() {}
 
     @Override
-    public Lecturer remove() {
-        return null;
-    }
+    public void remove() {}
 
     @Override
     public Lecturer update(Object obj) {
