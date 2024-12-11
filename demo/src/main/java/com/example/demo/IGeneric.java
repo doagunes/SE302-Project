@@ -1,7 +1,7 @@
 package com.example.demo;
 
 public interface IGeneric<T> {
-    T add();
-    T remove();
+    void add();
+    void remove();
     T update(T entity);
 }

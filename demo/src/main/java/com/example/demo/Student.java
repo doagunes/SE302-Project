@@ -23,14 +23,10 @@ public class Student extends Person{
     }
 
     @Override
-    public Student add() {
-        return null;
-    }
+    public void add() {}
 
     @Override
-    public Student remove() {
-        return null;
-    }
+    public void remove() {}
 
     @Override
     public Student update(Object obj) {

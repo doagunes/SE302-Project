@@ -99,15 +99,23 @@ public class Course implements IGeneric {
         return endTime;
     }
 
-    @Override
-    public Course add() {
-        return null;
+    public void toChangeClassroom(ArrayList<Classroom> classrooms) {
+        for(Classroom classroom : classrooms) {
+            if(classroom.isAvailable(getTimeToStart(),getStartTime(),getEndTime())){
+                if(classroom.getCapacity() >= getEnrolledStudentsList().size()) {
+                    Classroom updatelenecekClassroom = getAssignedClassroom();
+                    setAssignedClassroom(classroom);
+                }
+            }
+
+        }
     }
 
     @Override
-    public Course remove() {
-        return null;
-    }
+    public void add() {}
+
+    @Override
+    public void remove() {}
 
     @Override
     public Course update(Object obj) {
