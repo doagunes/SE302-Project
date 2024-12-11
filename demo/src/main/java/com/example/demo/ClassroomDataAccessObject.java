@@ -5,14 +5,13 @@ import java.util.ArrayList;
 
 public class ClassroomDataAccessObject {
 
-    private void createTable() {
+    public void createTable() {
         String sql = """
             CREATE TABLE IF NOT EXISTS Classroom (
-                Classroom TEXT NOT NULL,
-                Capacity INTEGER NOT NULL
+                Classroom TEXT NOT NULL UNIQUE,
+                Capacity INTEGER NOT NULL UNIQUE
             );
         """;
-
         try (Connection conn = DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
@@ -22,8 +21,7 @@ public class ClassroomDataAccessObject {
         }
     }
 
-    public void addClassroom(ArrayList<Classroom> classrooms){
-        createTable();
+    public void addClassroom(ArrayList<Classroom> classrooms) {
         String sql = "INSERT INTO Classroom (Classroom, Capacity) VALUES (?, ?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -31,8 +29,9 @@ public class ClassroomDataAccessObject {
                 pstmt.setString(1, classroom.getClassroomName());
                 pstmt.setInt(2, classroom.getCapacity());
                 pstmt.executeUpdate();
+                System.out.println("Classroom added: " + classroom.getClassroomName() +
+                        ", Capacity: " + classroom.getCapacity());
             }
-            System.out.println("Classroom added: " + classrooms);
         } catch (SQLException e) {
             System.out.println("Adding error: " + e.getMessage());
         }
@@ -44,7 +43,8 @@ public class ClassroomDataAccessObject {
              PreparedStatement pstmt = conn.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
             while (rs.next()) {
-                System.out.println("Classroom: " + rs.getString("Classroom") + ", Capacity: " + rs.getInt("Capacity"));
+                System.out.println("Classroom: " + rs.getString("Classroom") +
+                        ", Capacity: " + rs.getInt("Capacity"));
             }
         } catch (SQLException e) {
             System.out.println("Query error: " + e.getMessage());
