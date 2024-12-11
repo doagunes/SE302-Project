@@ -9,6 +9,7 @@ public class ClassroomDataAccessObject {
 
         String sql = """
             CREATE TABLE IF NOT EXISTS Classroom (
+                
                 Classroom TEXT NOT NULL ,
                 Capacity INTEGER NOT NULL ,
                 UNIQUE (Classroom, Capacity)  \s           
