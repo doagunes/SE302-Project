@@ -22,12 +22,6 @@ public class Lecturer extends Person {
         }
     }
 
-    @Override
-    public void add() {}
-
-    @Override
-    public void remove() {}
-
     public void addStudentToCourse(Course course,Student std){
         for(Course c : courses){
             if(c.getCourseID() == course.getCourseID()){
