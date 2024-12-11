@@ -5,15 +5,27 @@ import java.util.ArrayList;
 
 public class ClassroomDataAccessObject {
 
+
     public void createTable() {
+        /*
+        String sql2 = "DROP TABLE IF EXISTS Classroom";
+        try (Connection conn = DatabaseConnection.getConnection();
+             Statement stmt = conn.createStatement()) {
+            stmt.execute(sql2);
+            System.out.println("Classroom table has just created or it already exists.");
+        } catch (SQLException e) {
+            System.out.println("Creating table error: " + e.getMessage());
+        }
+
+         */
+
         String sql = """
             CREATE TABLE IF NOT EXISTS Classroom (
                 
                 Classroom TEXT NOT NULL ,
                 Capacity INTEGER NOT NULL ,
                 UNIQUE (Classroom, Capacity)  \s           
-                Classroom TEXT NOT NULL UNIQUE ,
-                Capacity INTEGER NOT NULL \s
+               
             );
        \s""";
         try (Connection conn = DatabaseConnection.getConnection();
