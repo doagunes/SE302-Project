@@ -39,8 +39,27 @@ public class Lecturer extends Person {
                         stdList.remove(std);
                     }
                 }
-
             }
+        }
+    }
+
+    public void TransferStudentToAnotherCourse(Course enrolledCourse, Course transferCourse, Student std) {
+        ArrayList<Student> stdList1  = enrolledCourse.getEnrolledStudentsList();
+        ArrayList<Student> stdList2  = transferCourse.getEnrolledStudentsList();
+        Classroom enrolledCourseClassroom = enrolledCourse.getAssignedClassroom();
+        Classroom transferClassroom = transferCourse.getAssignedClassroom();
+        int freePlaces = transferClassroom.getCapacity() - transferCourse.getEnrolledStudentsList().size();
+        if(super.getCourses().contains(enrolledCourse) && super.getCourses().contains(transferCourse)) {
+           if(std.getCourses().contains(enrolledCourse) && !std.getCourses().contains(transferCourse)) {
+               if(freePlaces >= 1) {
+                   std.getCourses().remove(enrolledCourse);
+                   std.getCourses().add(transferCourse);
+                   stdList1.remove(std);
+                   stdList2.add(std);
+                   enrolledCourseClassroom.setCapacity(enrolledCourseClassroom.getCapacity()-1);
+                   transferClassroom.setCapacity(transferClassroom.getCapacity()+1);
+               }
+           }
         }
     }
 
