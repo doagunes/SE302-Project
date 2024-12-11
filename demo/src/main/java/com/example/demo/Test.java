@@ -12,9 +12,12 @@ public class Test {
         cdo.getClassrooms();
          */
 
+
         CourseDataAccessObject courseDataAccessObject = new CourseDataAccessObject();
         courseDataAccessObject.createTable();
         courseDataAccessObject.addCourse(csv.readCourses());
         courseDataAccessObject.getCourses();
+
+
     }
 }
