@@ -22,7 +22,6 @@ public class Course implements IGeneric {
     private ArrayList<Attendance> attendanceRecordList;
 
 
-
     public Course(String courseID, String timeToStart,int duration, String lecturerName, ArrayList<String> studentNames) {
         this.courseID = courseID;
         this.duration = duration;
