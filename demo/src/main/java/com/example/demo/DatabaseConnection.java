@@ -20,17 +20,4 @@ public class DatabaseConnection {
 
         return connection;
     }
-
-    public static void closeConnection(){
-
-        if(connection != null){
-            try{
-                connection.close();
-                System.out.println("Connection closed!");
-
-            } catch (Exception e) {
-                System.out.println("Connection closed error: " + e.getMessage());
-            }
-        }
-    }
 }
