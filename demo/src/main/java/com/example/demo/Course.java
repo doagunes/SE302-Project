@@ -21,10 +21,7 @@ public class Course implements IGeneric {
     private ArrayList<Student> enrolledStudentsList;
     private ArrayList<Attendance> attendanceRecordList;
 
-    //TODO: Maalesefki parametrelerde olan lecturer ve student objelerini String ile değiştirmem gerekti çünkü
-    //TODO: csv den sadece öğrencinin ve öğretmenin adını çekebiliyoruz ID'lerini bulabileceğimiz bir data kaynagı yok tahminimce login ekranında
-    //TODO: Öğrenci ya da Öğretmen register olurken bu ID datası sistemimize gelicek ve o zaman Lecturer ve Student Objeleri oluşturabilicez
-    //TODO: Şu anlık bu sebeplerden dolayı referansları değiştridim eğer bu sorun aklınıza çözüm gelirse lütfen değiştirin.
+
 
     public Course(String courseID, String timeToStart,int duration, String lecturerName, ArrayList<String> studentNames) {
         this.courseID = courseID;
@@ -33,49 +30,45 @@ public class Course implements IGeneric {
         this.studentNames = studentNames;
         this.timeToStart = timeToStart;
 
-        /*
-        day ve startTime timeToStart Attributendan arada " " (boşluk) ile pars edilerek initialize edilicek
-        çünkü csv'deki parametre gün ve başlama saatini ";" ile ayırmamış.
-         */
         String[] timeParts = timeToStart.split(" ");
         this.courseDay = timeParts[0];
         this.startTime = LocalTime.parse(timeParts[1], DateTimeFormatter.ofPattern("H:mm"));
         this.endTime = this.getEndTime(startTime);
+
+        //TODO: Lecturer ve Students login yaptığında oluşturalım dedik. Login Interface geldiğinde burası değiştirilebilir.
 
         this.lecturer = createLecturer(lecturerName);
         this.lecturer.getCourses().add(this);
 
         this.enrolledStudentsList = createStudents(studentNames);
 
-        //TODO Person için gerekli olan bütün attributelar sağlandıtan sonra Student ve Lecturer Objeleri oluşturulup Course Objesinin gerekli attributeları ile initialize edilmeli.
-
     }
-    //TODO Bu metod csv reader ile uyumlu olmayabilir kontrol edilecek sonradan.
+
     public void assignClassroom(ArrayList<Classroom> classrooms) {
+        if (classrooms == null || classrooms.isEmpty()) {
+            System.out.println("No classrooms available for assignment.");
+            return;
+        }
+
         int studentCount = this.getStudentNames().size();
         String courseDay = this.courseDay;
         LocalTime startTime = this.startTime;
         LocalTime endTime = this.endTime;
 
-        // Kapasiteye göre sıralama, doluluk durumuna göre filtreleme
-        Classroom selectedClassroom = classrooms.stream()
-                .filter(classroom -> classroom.getCapacity() > studentCount)
-                // Sınıfları, kullanım sıklığına göre azdan çoğa sıralıyoruz
-                .sorted(Comparator.comparingInt((Classroom classroom) -> classroom.getCourses().size()) // Az kullanılan sınıflar önce gelsin
-                        .thenComparingInt(classroom -> classroom.getCapacity())) // Ardından kapasiteye göre sıralama
-                // Çakışmaları kontrol et
-                .filter(classroom -> classroom.isAvailable(courseDay, startTime, endTime))
-                .skip(1)  // İlk sınıfı atla, 2. en uygun sınıfı seçersek sınıfta boşluk kalır.
-                .findFirst()
-                .orElse(null);
+        classrooms.sort(Comparator.comparingInt(Classroom::getCapacity).reversed());
 
-        if (selectedClassroom != null) {
-            this.assignedClassroom = selectedClassroom;
-            selectedClassroom.getCourses().add(this);
-            System.out.println("Classroom assigned: " + selectedClassroom.getClassroomName());
-        } else {
-            System.out.println("No suitable classroom found for course: " + this.courseID);
+        // En büyük kapasiteye sahip olan sınıflar arasından uygun olanı bul
+        for (Classroom classroom : classrooms) {
+            if (classroom.getCapacity() >= studentCount && classroom.isAvailable(courseDay, startTime, endTime)) {
+                this.assignedClassroom = classroom;
+                classroom.getCourses().add(this);
+                System.out.println(this.getCourseID() + ": " + classroom.getClassroomName() + " " + classroom.getCapacity()); //test için
+                System.out.println(this.getCourseDay() + "-" + this.getStartTime() + "-" + this.getEndTime(this.getStartTime())); //test için
+                return;
+            }
         }
+
+        System.out.println("No suitable classroom found for course: " + this.getCourseID());
     }
 
     public Lecturer createLecturer(String lecturerName) {
@@ -91,7 +84,6 @@ public class Course implements IGeneric {
         }
         return students;
     }
-
 
     public LocalTime getEndTime(LocalTime startTime) {
         int totalDuration = duration * 45 + (duration - 1) * 10;
