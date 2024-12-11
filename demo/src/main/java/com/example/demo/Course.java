@@ -22,7 +22,6 @@ public class Course implements IGeneric {
     private ArrayList<Attendance> attendanceRecordList;
 
 
-
     public Course(String courseID, String timeToStart,int duration, String lecturerName, ArrayList<String> studentNames) {
         this.courseID = courseID;
         this.duration = duration;
@@ -41,7 +40,13 @@ public class Course implements IGeneric {
         this.lecturer.getCourses().add(this);
 
         this.enrolledStudentsList = createStudents(studentNames);
+        this.attendanceRecordList = new ArrayList<>();
 
+    }
+
+    public void trackAttendance(Student student, boolean isPresent) {
+        Attendance attendance = new Attendance(isPresent, this.getStartTime(), this.getCourseDay(), student, this); // Using current time for simplicity
+        this.attendanceRecordList.add(attendance);
     }
 
     public void assignClassroom(ArrayList<Classroom> classrooms) {

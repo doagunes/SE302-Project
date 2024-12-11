@@ -56,11 +56,14 @@ public class Lecturer extends Person {
                    std.getCourses().add(transferCourse);
                    stdList1.remove(std);
                    stdList2.add(std);
-                   enrolledCourseClassroom.setCapacity(enrolledCourseClassroom.getCapacity()-1);
-                   transferClassroom.setCapacity(transferClassroom.getCapacity()+1);
+                   System.out.println("Successfully transferred");
+                   return;
                }
+               System.out.println("Not enough place!");
            }
+            System.out.println("Student did not transfer!");
         }
+        System.out.println("This Lecturer cannot operate this transfer!");
     }
 
     @Override
