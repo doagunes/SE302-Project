@@ -1,10 +1,12 @@
 package com.example.demo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Student extends Person{
     private static Map<String, Student> studentsByName = new HashMap<>();
+    private ArrayList<Course> courses;
 
     public Student(String name) {
         super(name);
@@ -21,6 +23,9 @@ public class Student extends Person{
         studentsByName.put(name, student);
         return student;
     }
+
+
+
 
     @Override
     public void add() {}
