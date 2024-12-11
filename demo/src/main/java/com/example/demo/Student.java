@@ -6,7 +6,6 @@ import java.util.Map;
 
 public class Student extends Person{
     private static Map<String, Student> studentsByName = new HashMap<>();
-    private ArrayList<Course> courses;
 
     public Student(String name) {
         super(name);
