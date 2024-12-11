@@ -11,13 +11,18 @@ public class Classroom implements IGeneric {
     private ArrayList<Course> courses;
 
     public boolean isAvailable(String day, LocalTime startTime, LocalTime endTime) {
+        // Eğer 'courses' listesi null ise bu sınıf uygundur.
+        if (this.courses == null || this.courses.isEmpty()) {
+            return true;
+        }
+
         for (Course course : courses) {
             LocalTime courseStartTime = course.getStartTime();
             LocalTime courseEndTime = course.getEndTime(courseStartTime);
             String courseDay = course.getCourseDay();
             if (courseDay.equals(day)) {
                 if (startTime.isBefore(courseEndTime) && endTime.isAfter(courseStartTime)) {
-                    return false;
+                    return false; // Eğer çakışma varsa, bu sınıf uygun değil
                 }
             }
         }
@@ -27,6 +32,7 @@ public class Classroom implements IGeneric {
     public Classroom(String classroomName, int capacity) {
         this.classroomName = classroomName;
         this.capacity = capacity;
+        this.courses = new ArrayList<>();
     }
 
 
