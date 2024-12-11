@@ -9,7 +9,7 @@ public class ClassroomDataAccessObject {
         String sql = """
             CREATE TABLE IF NOT EXISTS Classroom (
                 Classroom TEXT NOT NULL UNIQUE ,
-                Capacity INTEGER NOT NULL UNIQUE\s
+                Capacity INTEGER NOT NULL \s
             );
        \s""";
         try (Connection conn = DatabaseConnection.getConnection();
