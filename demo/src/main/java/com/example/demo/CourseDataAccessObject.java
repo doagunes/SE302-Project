@@ -6,14 +6,14 @@ import java.util.Arrays;
 
 public class CourseDataAccessObject {
 
-    private void createTable() {
+    public void createTable() {
         String sql = """
             CREATE TABLE IF NOT EXISTS Course (
-                              Course TEXT NOT NULL,
+                              Course TEXT NOT NULL UNIQUE ,
                               TimeToStart TEXT NOT NULL,
                               DurationInLectureHours INTEGER NOT NULL,
                               Lecturer TEXT NOT NULL,
-                              Students TEXT NOT NULL
+                              Students TEXT NOT NULL\s
                           );
         """;
 
@@ -28,7 +28,7 @@ public class CourseDataAccessObject {
 
     public void addCourse(ArrayList<Course> courses){
 
-        createTable();
+
         String sql = "INSERT INTO Course(Course, TimeToStart, DurationInLectureHours, Lecturer, Students) VALUES (?, ?, ?, ?, ?)";
         try(Connection conn = DatabaseConnection.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -54,8 +54,11 @@ public class CourseDataAccessObject {
              ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
+                /*
                 String studentsString = rs.getString("Students");
                 ArrayList<String> students = stringToArrayList(studentsString);
+
+                 */
 
                 System.out.println("Course: " + rs.getString("Course") +
                         ", TimeToStart: " + rs.getString("TimeToStart") +

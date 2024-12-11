@@ -15,6 +15,7 @@ public class CSV_Reader {
             courses.add(new Course(data[0], data[1], Integer.parseInt(data[2]), data[3], readStudents(data)));
 
         }
+
         return courses;
     }
     public ArrayList<String> readStudents (String[] data) throws  IOException {
@@ -38,6 +39,7 @@ public class CSV_Reader {
             classrooms.add(new Classroom(data[0], Integer.parseInt(data[1])));
 
         }
+
         return classrooms;
 
     }

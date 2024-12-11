@@ -31,7 +31,7 @@ public class Course implements IGeneric {
         this.duration = duration;
         this.lecturerName = lecturerName;
         this.studentNames = studentNames;
-        //this.timeToStart = timeToStart;
+        this.timeToStart = timeToStart;
 
         /*
         day ve startTime timeToStart Attributendan arada " " (boşluk) ile pars edilerek initialize edilicek
