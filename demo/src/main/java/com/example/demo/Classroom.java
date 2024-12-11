@@ -29,10 +29,7 @@ public class Classroom implements IGeneric {
         this.capacity = capacity;
     }
 
-    @Override
-    public Classroom add() {
-        return null;
-    }
+
 
     public String getClassroomName() {
         return classroomName;
@@ -67,9 +64,10 @@ public class Classroom implements IGeneric {
     }
 
     @Override
-    public Classroom remove() {
-        return null;
-    }
+    public void add() {}
+
+    @Override
+    public void remove() {}
 
     @Override
     public Classroom update(Object obj) {
