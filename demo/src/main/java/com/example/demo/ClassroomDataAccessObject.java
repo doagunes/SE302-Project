@@ -8,10 +8,10 @@ public class ClassroomDataAccessObject {
     public void createTable() {
         String sql = """
             CREATE TABLE IF NOT EXISTS Classroom (
-                Classroom TEXT NOT NULL UNIQUE,
-                Capacity INTEGER NOT NULL UNIQUE
+                Classroom TEXT NOT NULL UNIQUE ,
+                Capacity INTEGER NOT NULL UNIQUE\s
             );
-        """;
+       \s""";
         try (Connection conn = DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
