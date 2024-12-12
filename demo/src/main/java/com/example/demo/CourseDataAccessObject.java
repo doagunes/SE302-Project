@@ -14,8 +14,8 @@ public class CourseDataAccessObject {
                               DurationInLectureHours INTEGER NOT NULL,
                               Lecturer TEXT NOT NULL,
                               Students TEXT NOT NULL\s
-                          );
-        """;
+                         );
+        \s""";
 
         try (Connection conn = DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement()) {

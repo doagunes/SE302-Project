@@ -21,7 +21,6 @@ public class Lecturer extends Person {
         }
     }
 
-
     public void addStudentToCourse(Course course,Student std){
         for(Course c : super.getCourses()){
             if(c.getCourseID() == course.getCourseID()){

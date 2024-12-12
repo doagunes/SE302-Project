@@ -8,6 +8,10 @@ public class ClassroomDataAccessObject {
     public void createTable() {
         String sql = """
             CREATE TABLE IF NOT EXISTS Classroom (
+                
+                Classroom TEXT NOT NULL ,
+                Capacity INTEGER NOT NULL ,
+                UNIQUE (Classroom, Capacity)  \s           
                 Classroom TEXT NOT NULL UNIQUE ,
                 Capacity INTEGER NOT NULL \s
             );
@@ -29,8 +33,7 @@ public class ClassroomDataAccessObject {
                 pstmt.setString(1, classroom.getClassroomName());
                 pstmt.setInt(2, classroom.getCapacity());
                 pstmt.executeUpdate();
-                System.out.println("Classroom added: " + classroom.getClassroomName() +
-                        ", Capacity: " + classroom.getCapacity());
+
             }
         } catch (SQLException e) {
             System.out.println("Adding error: " + e.getMessage());
