@@ -7,6 +7,7 @@ import java.util.Arrays;
 public class CourseDataAccessObject {
 
     public void createTable() {
+
         /*
         String sql2 = "DROP TABLE IF EXISTS Course";
         try (Connection conn = DatabaseConnection.getConnection();
@@ -16,8 +17,14 @@ public class CourseDataAccessObject {
         } catch (SQLException e) {
             System.out.println("Creating table error: " + e.getMessage());
         }
-        
+
          */
+
+
+
+
+
+
 
         String sql = """
             CREATE TABLE IF NOT EXISTS Course (
@@ -26,7 +33,7 @@ public class CourseDataAccessObject {
                               DurationInLectureHours INTEGER NOT NULL,
                               Lecturer TEXT NOT NULL,
                               Students TEXT NOT NULL,
-                               UNIQUE(Course,TimeToStart, DurationInLectureHours, Lecturer, Students) \s
+                               UNIQUE(Course) \s
                          );
         \s""";
 
@@ -42,7 +49,7 @@ public class CourseDataAccessObject {
     public void addCourse(ArrayList<Course> courses){
 
 
-        String sql = "INSERT INTO Course(Course, TimeToStart, DurationInLectureHours, Lecturer, Students) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT OR IGNORE INTO Course(Course, TimeToStart, DurationInLectureHours, Lecturer, Students) VALUES (?, ?, ?, ?, ?)";
         try(Connection conn = DatabaseConnection.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
             for(Course course : courses){
@@ -53,9 +60,10 @@ public class CourseDataAccessObject {
                 String studentsAsString = String.join(",", course.getStudentNames());
                 pstmt.setString(5, studentsAsString);
                 pstmt.executeUpdate();
+
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
