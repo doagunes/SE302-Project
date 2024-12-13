@@ -17,7 +17,6 @@ public class Attendance {
         this.course = course;
     }
 
-
     public LocalTime getTime() {
         return time;
     }
