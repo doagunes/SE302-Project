@@ -101,4 +101,28 @@ public class CourseDataAccessObject {
         }
         return studentList;
     }
+
+    public void getCourseWhereLecturerIs(String lecturerName) {
+        String sql = "SELECT Course, Lecturer FROM Course WHERE Lecturer = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, lecturerName);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                boolean hasResults = false;
+                while (rs.next()) {
+                    hasResults = true;
+                    System.out.println("Lecturer: " + rs.getString("Lecturer") +
+                            ", Course: " + rs.getString("Course"));
+                }
+                if (!hasResults) {
+                    System.out.println("No courses found for Lecturer: " + lecturerName);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Query error: " + e.getMessage());
+        }
+    }
+
 }
