@@ -18,7 +18,7 @@ public class Test {
         CourseDataAccessObject courseDataAccessObject = new CourseDataAccessObject();
         courseDataAccessObject.createTable();
         courseDataAccessObject.addCourse(csv.readCourses());
-        courseDataAccessObject.getCourses();
+        courseDataAccessObject.getCourseWhereLecturerIs("Okan Yaman");
 
     }
 }
