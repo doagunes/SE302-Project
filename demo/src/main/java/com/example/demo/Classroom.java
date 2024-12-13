@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-public class Classroom implements IGeneric {
+public class Classroom {
     private String classroomName;
     private int capacity;
     private ArrayList<Boolean> availableList;
@@ -69,15 +69,5 @@ public class Classroom implements IGeneric {
         this.courses = courses;
     }
 
-    @Override
-    public void add() {}
-
-    @Override
-    public void remove() {}
-
-    @Override
-    public Classroom update(Object obj) {
-        return null;
-    }
 
 }

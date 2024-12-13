@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class Course implements IGeneric {
+public class Course {
     private String courseID;
     private String timeToStart;
     private int duration;
@@ -42,11 +42,6 @@ public class Course implements IGeneric {
         this.enrolledStudentsList = createStudents(studentNames);
         this.attendanceRecordList = new ArrayList<>();
 
-    }
-
-    public void trackAttendance(Student student, boolean isPresent) {
-        Attendance attendance = new Attendance(isPresent, this.getStartTime(), this.getCourseDay(), student, this); // Using current time for simplicity
-        this.attendanceRecordList.add(attendance);
     }
 
     public void assignClassroom(ArrayList<Classroom> classrooms) {
@@ -94,29 +89,6 @@ public class Course implements IGeneric {
         int totalDuration = duration * 45 + (duration - 1) * 10;
         endTime = startTime.plusMinutes(totalDuration);
         return endTime;
-    }
-
-    public void toChangeClassroom(ArrayList<Classroom> classrooms) {
-        for(Classroom classroom : classrooms) {
-            if(classroom.isAvailable(getTimeToStart(),getStartTime(),getEndTime())){
-                if(classroom.getCapacity() >= getEnrolledStudentsList().size()) {
-                    Classroom updatelenecekClassroom = getAssignedClassroom();
-                    setAssignedClassroom(classroom);
-                }
-            }
-
-        }
-    }
-
-    @Override
-    public void add() {}
-
-    @Override
-    public void remove() {}
-
-    @Override
-    public Course update(Object obj) {
-        return null;
     }
 
     public LocalTime getStartTime() {
