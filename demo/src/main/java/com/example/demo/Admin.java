@@ -8,9 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Admin {
+    private CourseDataAccessObject courseDAO;
+    private ClassroomDataAccessObject classroomDAO;
+
+    public Admin() {
+        courseDAO = new CourseDataAccessObject();
+        classroomDAO = new ClassroomDataAccessObject();
+    }
 
     //TODO: BU METODLAR DAHA TEST EDİLMEDİ.
 
+    //TODO: PARAMETREDEKİ COURSE'UN CLASSROOMU VE STUDENT'IN COURSELARI
     public void addStudentToCourse(Course course, Student student) {
         Classroom cls = course.getAssignedClassroom();
         if(!student.getCourses().contains(course)) {
@@ -49,6 +57,7 @@ public class Admin {
         }
     }
 
+    //TODO: COURSENUN CLASSROOMU, COURSEUN STUDENT LİSTİ, CLASSROOMUN CAPACİTYSİ,
     public void changeClassroom(Course course, Classroom newClassroom) {
         Classroom currentClassroom = course.getAssignedClassroom();
         int studentCount = course.getEnrolledStudentsList().size();
@@ -70,6 +79,7 @@ public class Admin {
         newClassroom.getCourses().add(course);
         System.out.println("Classroom changed to: " + newClassroom.getClassroomName());
     }
+
 
     public void markAttendanceForStudent(Student student, Course course, boolean isPresent) {
         // Öğrencinin o derse ait devamsızlık kaydını işaretle
