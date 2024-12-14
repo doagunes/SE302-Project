@@ -36,7 +36,11 @@ public class İlaydaTest {
             Course crs4 = courses.get(3);
 
 
+<<<<<<< Updated upstream
            // lecturer.TransferStudentToAnotherCourse(crs1, crs2, crs1.getEnrolledStudentsList().get(1));
+=======
+            //lecturer.TransferStudentToAnotherCourse(crs1, crs2, crs1.getEnrolledStudentsList().get(1));
+>>>>>>> Stashed changes
             
 
 
