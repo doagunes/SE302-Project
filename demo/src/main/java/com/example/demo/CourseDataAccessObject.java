@@ -63,29 +63,34 @@ public class CourseDataAccessObject {
         }
     }
 
-    public void getCourses(){
+    public ArrayList<Course> getCourses(){
+        ArrayList<Course> AllCourses = new ArrayList<>();
         String sql = "SELECT * FROM Course";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
-                /*
+                ArrayList<String> studentsInCourse = new ArrayList<>();
                 String studentsString = rs.getString("Students");
-                ArrayList<String> students = stringToArrayList(studentsString);
+                studentsInCourse = stringToArrayList(studentsString);
+                AllCourses.add(new Course(rs.getString("Course"), rs.getString("TimeToStart"),
+                        rs.getInt("DurationInLectureHours"), rs.getString("Lecturer"), studentsInCourse));
 
-                 */
-
+                /*
                 System.out.println("Course: " + rs.getString("Course") +
                         ", TimeToStart: " + rs.getString("TimeToStart") +
                         ", DurationInLectureHours: " + rs.getInt("DurationInLectureHours") +
                         ", Lecturer: " + rs.getString("Lecturer") +
                         ", Students: " + rs.getString("Students"));
+
+                 */
             }
 
         } catch (SQLException e) {
             System.out.println("Query error: " + e.getMessage());
         }
+        return AllCourses;
     }
     // Helper method to convert a comma-separated String to an ArrayList
     private ArrayList<String> stringToArrayList(String students) {
@@ -118,6 +123,27 @@ public class CourseDataAccessObject {
         } catch (SQLException e) {
             System.out.println("Query error: " + e.getMessage());
         }
+    }
+    public ArrayList<String> getCoursesBasedOnStudent (String studentName) {
+        ArrayList<String> courseIDs = new ArrayList<>();
+        String sql = "SELECT Course FROM Course WHERE Students LIKE ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // '%studentName%' ifadesini SQL sorgusuna ekler.
+            pstmt.setString(1, "%" + studentName + "%");
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    courseIDs.add(rs.getString("Course"));
+                }
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Query error: " + e.getMessage());
+        }
+        return courseIDs;
+        //Helper method ile bu Course ID'leri Course objesine dönüştür arrayListin içinde.
     }
 
 
