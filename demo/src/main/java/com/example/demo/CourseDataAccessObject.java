@@ -21,11 +21,6 @@ public class CourseDataAccessObject {
          */
 
 
-
-
-
-
-
         String sql = """
             CREATE TABLE IF NOT EXISTS Course (
                               Course TEXT NOT NULL  ,
@@ -124,5 +119,6 @@ public class CourseDataAccessObject {
             System.out.println("Query error: " + e.getMessage());
         }
     }
+
 
 }
