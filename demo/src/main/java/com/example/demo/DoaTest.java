@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class DoaTest {
     public static void main(String[] args) throws IOException {
@@ -11,7 +12,12 @@ public class DoaTest {
         ClassroomDataAccessObject cdo = new ClassroomDataAccessObject();
         cdo.createTable();
         cdo.addClassroom(csv.readClassrooms());
-        cdo.getCapacityWhereClassroomIs("C201");
+        ArrayList<Classroom> arr = cdo.getClassrooms();
+        for(int i = 0; i< arr.size(); i++){
+            System.out.println(arr.get(i).getClassroomName() + arr.get(i).getCapacity() );
+        }
+        //System.out.println(cdo.getCapacityWhereClassroomIs("C201"));
+
 
        /*
         CourseDataAccessObject courseDataAccessObject = new CourseDataAccessObject();

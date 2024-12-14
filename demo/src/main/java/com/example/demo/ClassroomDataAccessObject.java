@@ -53,22 +53,27 @@ public class ClassroomDataAccessObject {
         }
     }
 
-    public void getClassrooms() {
+    public ArrayList<Classroom> getClassrooms() {
+        ArrayList<Classroom> allClassroom = new ArrayList<>();
         String sql = "SELECT * FROM Classroom";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
             while (rs.next()) {
-                System.out.println("Classroom: " + rs.getString("Classroom") +
-                        ", Capacity: " + rs.getInt("Capacity"));
+
+                allClassroom.add(new Classroom(rs.getString("Classroom"), rs.getInt("Capacity")));
+
             }
         } catch (SQLException e) {
             System.out.println("Query error: " + e.getMessage());
         }
+        return  allClassroom;
     }
 
-    public void getCapacityWhereClassroomIs(String classroomName) {
-        String sql = "SELECT Classroom, Capacity FROM Classroom WHERE Classroom = ?";
+
+    public int getCapacityWhereClassroomIs(String classroomName) {
+        int capacity = 0;
+        String sql = "SELECT Capacity FROM Classroom WHERE Classroom = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -79,8 +84,8 @@ public class ClassroomDataAccessObject {
 
                 while (rs.next()) { // it is checking for hasResult
                     hasResult = true;
-                    System.out.println("Classroom: " + rs.getString("Classroom") +
-                            ", Capacity: " + rs.getString("Capacity"));
+                    capacity = rs.getInt("Capacity");
+
                 }
 
                 if (!hasResult) {
@@ -90,6 +95,7 @@ public class ClassroomDataAccessObject {
         } catch (SQLException e) {
             System.out.println("Query error: " + e.getMessage());
         }
+        return capacity;
     }
 
 }

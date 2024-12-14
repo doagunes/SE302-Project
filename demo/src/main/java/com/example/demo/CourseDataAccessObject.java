@@ -102,8 +102,9 @@ public class CourseDataAccessObject {
         return studentList;
     }
 
-    public void getCourseWhereLecturerIs(String lecturerName) {
-        String sql = "SELECT Course, Lecturer FROM Course WHERE Lecturer = ?";
+    public ArrayList<String> getCourseWhereLecturerIs(String lecturerName) {
+        ArrayList<String> courseIDs = new ArrayList<>();
+        String sql = "SELECT Course FROM Course WHERE Lecturer = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -113,8 +114,8 @@ public class CourseDataAccessObject {
                 boolean hasResults = false;
                 while (rs.next()) {
                     hasResults = true;
-                    System.out.println("Lecturer: " + rs.getString("Lecturer") +
-                            ", Course: " + rs.getString("Course"));
+                    courseIDs.add(rs.getString("Course"));
+
                 }
                 if (!hasResults) {
                     System.out.println("No courses found for Lecturer: " + lecturerName);
@@ -123,6 +124,7 @@ public class CourseDataAccessObject {
         } catch (SQLException e) {
             System.out.println("Query error: " + e.getMessage());
         }
+        return courseIDs;
     }
     public ArrayList<String> getCoursesBasedOnStudent (String studentName) {
         ArrayList<String> courseIDs = new ArrayList<>();
