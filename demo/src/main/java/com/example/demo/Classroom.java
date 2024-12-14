@@ -7,9 +7,11 @@ import java.util.ArrayList;
 public class Classroom {
     private String classroomName;
     private int capacity;
-    private ArrayList<Boolean> availableList;
+    //private ArrayList<Boolean> availableList;
     private ArrayList<Course> courses;
+    private ClassroomDataAccessObject classroomDAO;
 
+    //TODO: BURDA TÜM CLASSROOMLAR CHECK EDİLİYOR.
     public boolean isAvailable(String day, LocalTime startTime, LocalTime endTime) {
         // Eğer 'courses' listesi null ise bu sınıf uygundur.
         if (this.courses == null || this.courses.isEmpty()) {
@@ -35,30 +37,16 @@ public class Classroom {
         this.courses = new ArrayList<>();
     }
 
-
-
     public String getClassroomName() {
         return classroomName;
     }
 
-    public void setClassroomName(String classroomName) {
-        this.classroomName = classroomName;
+    public ArrayList<Classroom> getAllClassrooms() {
+        return classroomDAO.getClassrooms();
     }
 
     public int getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
-
-    public ArrayList<Boolean> getAvailableList() {
-        return availableList;
-    }
-
-    public void setAvailableList(ArrayList<Boolean> availableList) {
-        this.availableList = availableList;
+        return classroomDAO.getCapacityWhereClassroomIs(classroomName);
     }
 
     public ArrayList<Course> getCourses() {

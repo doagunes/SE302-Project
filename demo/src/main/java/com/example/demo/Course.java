@@ -20,6 +20,7 @@ public class Course {
     private Classroom assignedClassroom;
     private ArrayList<Student> enrolledStudentsList;
     private ArrayList<Attendance> attendanceRecordList;
+    private CourseDataAccessObject courseDAO;
 
 
     public Course(String courseID, String timeToStart,int duration, String lecturerName, ArrayList<String> studentNames) {
@@ -41,9 +42,11 @@ public class Course {
 
         this.enrolledStudentsList = createStudents(studentNames);
         this.attendanceRecordList = new ArrayList<>();
+        courseDAO = new CourseDataAccessObject();
+
 
     }
-
+    //TODO: DERSİN STUDENT LİSTİ VE TÜM CLASSROOMDS
     public void assignClassroom(ArrayList<Classroom> classrooms) {
         if (classrooms == null || classrooms.isEmpty()) {
             System.out.println("No classrooms available for assignment.");
@@ -71,6 +74,7 @@ public class Course {
         System.out.println("No suitable classroom found for course: " + this.getCourseID());
     }
 
+    //TODO: BU CREATELER SİLİNEBİLİR :o
     public Lecturer createLecturer(String lecturerName) {
         return Lecturer.findLecturerByName(lecturerName);
     }
