@@ -48,6 +48,7 @@ public class Course {
     }
     //TODO: DERSİN STUDENT LİSTİ VE TÜM CLASSROOMDS
     public void assignClassroom(ArrayList<Classroom> classrooms) {
+        //TODO Kapasiteler Sql dan çekilcek
         if (classrooms == null || classrooms.isEmpty()) {
             System.out.println("No classrooms available for assignment.");
             return;

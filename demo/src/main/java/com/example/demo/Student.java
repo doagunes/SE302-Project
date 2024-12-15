@@ -25,6 +25,7 @@ public class Student extends Person{
     }
 
     public int getAbsenceCountForCourse(Course course) {
+        //TODO SQL'dan çekilcek veri
         return absenceCountByCourse.getOrDefault(course, 0);
     }
 
