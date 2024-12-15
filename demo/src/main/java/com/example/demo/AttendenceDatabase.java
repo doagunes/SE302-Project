@@ -88,6 +88,8 @@ public class AttendenceDatabase {
                 pstmt.executeUpdate();        // Sorgu çalıştırılır
 
             }
+            */
+
 
              */
 
