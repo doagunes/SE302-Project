@@ -31,6 +31,8 @@ public class Admin {
                     if(student.isAvaiable(course)){
                         student.getCourses().add(course);
                         course.getEnrolledStudentsList().add(student);
+                        CourseDataAccessObject.updateForAddingStudentToCourse(course, student); // buraya ekledimmm <3
+                        //TODO: Yapıldı kontrol edilecek --> doa
                     }
 
                 } else {
@@ -41,7 +43,7 @@ public class Admin {
             }
         }
 
-        //TODO öğrenci yeni kursa eklenince sql update!
+
     }
 
     public void removeStudentFromCourse(Course course, Student student) {
