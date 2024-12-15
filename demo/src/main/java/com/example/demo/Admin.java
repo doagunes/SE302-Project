@@ -48,10 +48,12 @@ public class Admin {
         if(student.getCourses().contains(course)) {
             student.getCourses().remove(course);
             course.getEnrolledStudentsList().remove(student);
+
+          CourseDataAccessObject.updateForRemovingStudent(course, student);
         } else {
             System.out.println("Transfer failed: The student is not enrolled in this course.");
         }
-        //TODO SQL UPDATE
+        //TODO : update işlemini yaptım fakat denenmedi !!! <3 doa
     }
 
     public void transferStudentToAnotherCourse(Course enrolledCourse, Course transferCourse, Student student) {
