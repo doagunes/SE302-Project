@@ -21,12 +21,16 @@ public class Admin {
     //TODO: PARAMETREDEKİ COURSE'UN CLASSROOMU VE STUDENT'IN COURSELARI
     public void addStudentToCourse(Course course, Student student) {
         Classroom cls = course.getAssignedClassroom();
-        //TODO öğrenci yeni bir kursa eklencekken zaman çizelgesi o ders için uygun mu? kontrol edilcek
+        //TODO 1öğrenci yeni bir kursa eklencekken zaman çizelgesi o ders için uygun mu? kontrol edilcek
         //TODO Yeni bir if eklenicek
+
         if(!student.getCourses().contains(course)) {
             if(cls.getCapacity() > course.getEnrolledStudentsList().size()) {
-                student.getCourses().add(course);
-                course.getEnrolledStudentsList().add(student);
+                if(student.isAvaiable(course)){
+                    student.getCourses().add(course);
+                    course.getEnrolledStudentsList().add(student);
+                }
+
             } else {
                 System.out.println("There is no space in the classroom.");
             }

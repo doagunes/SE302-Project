@@ -41,4 +41,18 @@ public class Student extends Person{
         }
         course.getAttendanceRecordList().add(attendance);  // Attendance kaydını derse ekle
     }
+
+
+    public boolean isAvaiable(Course course){
+        for(Course c : getCourses() ){
+            if(c.getCourseDay() == course.getCourseDay()){
+                if(c.getEndTime().isAfter(course.getStartTime())){
+                    return true;
+                }else if(c.getStartTime().isAfter(course.getEndTime())){
+                    return true;
+                }
+            }
+        }
+       return false;
+    }
 }
