@@ -41,7 +41,7 @@ public class Admin {
             }
         }
 
-        //TODO öğrenci yeni kursa geçince sql update!
+        //TODO öğrenci yeni kursa eklenince sql update!
     }
 
     public void removeStudentFromCourse(Course course, Student student) {
@@ -49,11 +49,12 @@ public class Admin {
             student.getCourses().remove(course);
             course.getEnrolledStudentsList().remove(student);
 
-          CourseDataAccessObject.updateForRemovingStudent(course, student);
+            CourseDataAccessObject.updateForRemovingStudent(course, student); // buraya ekledimm
+            // TODO : update işlemini yaptım fakat denenmedi !!! <3 doa
         } else {
             System.out.println("Transfer failed: The student is not enrolled in this course.");
         }
-        //TODO : update işlemini yaptım fakat denenmedi !!! <3 doa
+
     }
 
     public void transferStudentToAnotherCourse(Course enrolledCourse, Course transferCourse, Student student) {
@@ -67,7 +68,8 @@ public class Admin {
                     transferCourse.getEnrolledStudentsList().remove(student);
                     enrolledCourse.getEnrolledStudentsList().add(student);
 
-                    CourseDataAccessObject.updateForTransferringStudent(enrolledCourse, transferCourse, student);
+                    CourseDataAccessObject.updateForTransferringStudent(enrolledCourse, transferCourse, student); // buraya ekledimm
+                    //TODO: bu da tamam metodu doğru yerde mi çağırıyorum bilemedim ve yine denemedim :((
                 }
 
             } else {
@@ -76,7 +78,7 @@ public class Admin {
         } else {
             System.out.println("Transfer failed: Either the student is not enrolled in the course or already transferred.");
         }
-        //TODO: bu da tamam metodu doğru yerde mi çağırıyorum bilemedim ve yine denemedim :((
+
     }
 
     //TODO: COURSENUN CLASSROOMU, COURSEUN STUDENT LİSTİ, CLASSROOMUN CAPACİTYSİ,
