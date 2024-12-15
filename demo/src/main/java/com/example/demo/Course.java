@@ -36,8 +36,6 @@ public class Course {
         this.startTime = LocalTime.parse(timeParts[1], DateTimeFormatter.ofPattern("H:mm"));
         this.endTime = this.getEndTime(startTime);
 
-        //TODO: Lecturer ve Students login yaptığında oluşturalım dedik. Login Interface geldiğinde burası değiştirilebilir.
-
         this.lecturer = createLecturer(lecturerName);
         this.lecturer.getCourses().add(this);
 
@@ -45,9 +43,8 @@ public class Course {
         this.attendanceRecordList = new ArrayList<>();
         courseDAO = new CourseDataAccessObject();
 
-
     }
-    //TODO: DERSİN STUDENT LİSTİ VE TÜM CLASSROOMDS
+
     public void assignClassroom(ArrayList<Classroom> classrooms) {
         //TODO Kapasiteler Sql dan çekilcek
         if (classrooms == null || classrooms.isEmpty()) {
