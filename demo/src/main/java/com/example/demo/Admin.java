@@ -51,13 +51,17 @@ public class Admin {
     }
 
     public void transferStudentToAnotherCourse(Course enrolledCourse, Course transferCourse, Student student) {
-        //TODO  öğrenci yeni bir kursa eklencekken zaman çizelgesi o ders için uygun mu? kontrol edilcek
+        //TODO  2öğrenci yeni bir kursa eklencekken zaman çizelgesi o ders için uygun mu? kontrol edilcek
+
         if(student.getCourses().contains(enrolledCourse) && !student.getCourses().contains(transferCourse)) {
             if(transferCourse.getAssignedClassroom().getCapacity() > transferCourse.getEnrolledStudentsList().size()) {
-                student.getCourses().add(transferCourse);
-                student.getCourses().remove(enrolledCourse);
-                transferCourse.getEnrolledStudentsList().remove(student);
-                enrolledCourse.getEnrolledStudentsList().add(student);
+                if(student.isAvaiable(enrolledCourse)){
+                    student.getCourses().add(transferCourse);
+                    student.getCourses().remove(enrolledCourse);
+                    transferCourse.getEnrolledStudentsList().remove(student);
+                    enrolledCourse.getEnrolledStudentsList().add(student);
+                }
+
             } else {
                 System.out.println("There is no space in the classroom.");
             }
