@@ -41,7 +41,8 @@ public class CourseDataAccessObject {
         }
     }
 
-    public void addCourse(ArrayList<Course> courses){
+    //TODO user yeni bir kurs ekleyeceği zaman addNewCourse methodu lazım
+    public void addCourse(ArrayList<Course> courses){ //csv'deki verileri kullanıyor
 
 
         String sql = "INSERT OR IGNORE INTO Course(Course, TimeToStart, DurationInLectureHours, Lecturer, Students) VALUES (?, ?, ?, ?, ?)";
@@ -102,6 +103,7 @@ public class CourseDataAccessObject {
         return studentList;
     }
 
+    //TODO Öğretmen ve öğrenciye göre kursların çekidleiği methodun return parametesi Course olkucak!
     public ArrayList<String> getCourseWhereLecturerIs(String lecturerName) {
         ArrayList<String> courseIDs = new ArrayList<>();
         String sql = "SELECT Course FROM Course WHERE Lecturer = ?";

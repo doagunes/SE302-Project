@@ -21,6 +21,8 @@ public class Admin {
     //TODO: PARAMETREDEKİ COURSE'UN CLASSROOMU VE STUDENT'IN COURSELARI
     public void addStudentToCourse(Course course, Student student) {
         Classroom cls = course.getAssignedClassroom();
+        //TODO öğrenci yeni bir kursa eklencekken zaman çizelgesi o ders için uygun mu? kontrol edilcek
+        //TODO Yeni bir if eklenicek
         if(!student.getCourses().contains(course)) {
             if(cls.getCapacity() > course.getEnrolledStudentsList().size()) {
                 student.getCourses().add(course);
@@ -31,6 +33,7 @@ public class Admin {
         } else {
             System.out.println("Transfer failed: The student is already enrolled in this course");
         }
+        //TODO öğrenci yeni kursa geçince sql update!
     }
 
     public void removeStudentFromCourse(Course course, Student student) {
@@ -40,9 +43,11 @@ public class Admin {
         } else {
             System.out.println("Transfer failed: The student is not enrolled in this course.");
         }
+        //TODO SQL UPDATE
     }
 
     public void transferStudentToAnotherCourse(Course enrolledCourse, Course transferCourse, Student student) {
+        //TODO  öğrenci yeni bir kursa eklencekken zaman çizelgesi o ders için uygun mu? kontrol edilcek
         if(student.getCourses().contains(enrolledCourse) && !student.getCourses().contains(transferCourse)) {
             if(transferCourse.getAssignedClassroom().getCapacity() > transferCourse.getEnrolledStudentsList().size()) {
                 student.getCourses().add(transferCourse);
@@ -55,6 +60,7 @@ public class Admin {
         } else {
             System.out.println("Transfer failed: Either the student is not enrolled in the course or already transferred.");
         }
+        //TODO SQL Update
     }
 
     //TODO: COURSENUN CLASSROOMU, COURSEUN STUDENT LİSTİ, CLASSROOMUN CAPACİTYSİ,
@@ -78,6 +84,7 @@ public class Admin {
         course.setAssignedClassroom(newClassroom);
         newClassroom.getCourses().add(course);
         System.out.println("Classroom changed to: " + newClassroom.getClassroomName());
+        //TODO SQL UPDATE
     }
 
 
@@ -90,6 +97,7 @@ public class Admin {
         } else {
             System.out.println("Student " + student.getName() + " is present in course " + course.getCourseID());
         }
+        //TODO sql update
     }
 
     public void viewStudentAbsenteeism(Student student, Course course) {
@@ -97,6 +105,7 @@ public class Admin {
         int absenteeismCount = student.getAbsenceCountForCourse(course);
         System.out.println("Student " + student.getName() + " has " + absenteeismCount + " absences in course " + course.getCourseID());
     }
+    //TODO SQL getAttendence
 
     // Öğrencinin tüm derslerdeki devamsızlıklarını görüntüleme
     public void viewAllAbsenteeismForStudent(Student student) {
@@ -105,5 +114,6 @@ public class Admin {
             int absenteeismCount = student.getAbsenceCountForCourse(course);
             System.out.println("In course " + course.getCourseID() + ": " + absenteeismCount + " absences.");
         }
+        //TODO SQL spesifik öğrenci için devamsılık göstercek
     }
 }
