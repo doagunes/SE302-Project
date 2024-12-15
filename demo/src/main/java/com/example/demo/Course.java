@@ -5,6 +5,7 @@ import com.almasb.fxgl.core.collection.Array;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 
 public class Course {
@@ -54,7 +55,7 @@ public class Course {
             return;
         }
 
-        int studentCount = this.getStudentNames().size();
+        int studentCount = this.getEnrolledStudentsList().size();
         String courseDay = this.courseDay;
         LocalTime startTime = this.startTime;
         LocalTime endTime = this.endTime;
@@ -190,5 +191,9 @@ public class Course {
 
     public void setAttendanceRecordList(ArrayList<Attendance> attendanceRecordList) {
         this.attendanceRecordList = attendanceRecordList;
+    }
+
+    public ArrayList<Student> getStudents() {
+        return enrolledStudentsList;
     }
 }
