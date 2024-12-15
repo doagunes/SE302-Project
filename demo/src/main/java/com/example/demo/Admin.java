@@ -119,6 +119,16 @@ public class Admin {
     }
     //TODO SQL getAttendence
 
+    //TODO viewStudentAbsenteeism methodunu kullansak daha iyi olmaz mı ilayda?
+    public void viewAllAbsenteeismForStudent2(Student student) {
+        System.out.println("Absenteeism details for student: " + student.getName());
+        for (Course course : student.getCourses()) {
+           viewStudentAbsenteeism(student,course);
+        }
+        //TODO SQL spesifik öğrenci için devamsılık göstercek
+    }
+
+
     // Öğrencinin tüm derslerdeki devamsızlıklarını görüntüleme
     public void viewAllAbsenteeismForStudent(Student student) {
         System.out.println("Absenteeism details for student: " + student.getName());
