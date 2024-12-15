@@ -180,6 +180,24 @@ public class CourseDataAccessObject {
         return courses;
     }
 
+    public static void updateForAddingStudentToCourse(Course course, Student student){
+        String sql = "UPDATE Course SET Students =? WHERE Course =?";
+
+        try(Connection conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            ArrayList<String> currentStudents = course.getStudentNames();
+            currentStudents.add(student.getName());
+            String addedStudents = String.join(",", currentStudents);
+
+            pstmt.setString(1, addedStudents);
+            pstmt.setString(2, course.getCourseID());
+
+        } catch (SQLException e) {
+            System.out.println("Query error: " + e.getMessage());
+        }
+    }
+
     public static void updateForRemovingStudent(Course course, Student student){
         String sql = " UPDATE Course SET Students =? WHERE Course =? ";
 
@@ -229,5 +247,6 @@ public class CourseDataAccessObject {
             System.out.println("Query error: " + e.getMessage());
         }
     }
+
 
 }
