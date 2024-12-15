@@ -14,6 +14,9 @@ module com.example.demo {
     requires com.almasb.fxgl.all;
     requires java.rmi;
     requires java.sql;
+    requires org.junit.jupiter.api;
+    requires org.junit.platform.commons;
+
 
     opens com.example.demo to javafx.fxml;
     exports com.example.demo;
