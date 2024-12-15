@@ -82,11 +82,14 @@ public class AttendenceDatabase {
         String insertQuery = "INSERT OR IGNORE INTO Attendance(student_id, student_name, course_name, absence_count) VALUES (?, ?, ?, ?)";
         try(Connection conn = DatabaseConnection.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(insertQuery)){
+            /*
             for(String student : allStudents){
                 pstmt.setString(1, student);
                 pstmt.executeUpdate();        // Sorgu çalıştırılır
 
             }
+
+             */
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
