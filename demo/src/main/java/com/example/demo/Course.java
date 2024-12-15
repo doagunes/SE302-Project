@@ -182,6 +182,16 @@ public class Course {
         this.enrolledStudentsList = enrolledStudentsList;
     }
 
+    @Override
+    public String toString() {
+        return "Course{" +
+               "courseID='" + courseID + '\'' +
+               ", timeToStart='" + timeToStart + '\'' +
+               ", duration=" + duration +
+               ", lecturerName='" + lecturerName +
+               '}';
+    }
+
     public ArrayList<Attendance> getAttendanceRecordList() {
         return attendanceRecordList;
     }

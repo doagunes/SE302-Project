@@ -22,18 +22,18 @@ public class DoaTest {
         //System.out.println(cdo.getCapacityWhereClassroomIs("C201"));
 
 
-        /*
+
         CourseDataAccessObject courseDataAccessObject = new CourseDataAccessObject();
         courseDataAccessObject.createTable();
         courseDataAccessObject.addCourse(csv.readCourses());
         //courseDataAccessObject.getCourses();
         //courseDataAccessObject.getCourseWhereLecturerIs("Turhan Tunalı");
-        ArrayList<Course> arr = courseDataAccessObject.getCourses();
-        for(int i = 0; i< arr.size(); i++){
-            //System.out.println(arr.get(i).getCourseID() + arr.get(i).getTimeToStart(), arr.get(i).getDuration(), arr.get(i).getLecturer(), arr.get(i).getStudentNames().toString());
+        ArrayList<Course> arr = courseDataAccessObject.getCoursesBasedOnStudent("DOĞA GÜNEŞ");
+        for(Course course : arr){
+            System.out.println(course.toString());
         }
 
-         */
+
 
         AttendenceDatabase ad = new AttendenceDatabase();
         ad.createTables();
