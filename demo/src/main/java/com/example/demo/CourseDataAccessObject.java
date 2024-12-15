@@ -201,4 +201,33 @@ public class CourseDataAccessObject {
         }
     }
 
+    public static void updateForTransferringStudent(Course enrolledCourse, Course transferCourse, Student student){
+        String sql = " UPDATE Course SET Students =? WHERE Course =? ";
+        String sql2 = " UPDATE Course SET Students =? WHERE Course =? ";
+
+        try(Connection conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            PreparedStatement pstmt2 = conn.prepareStatement(sql2)){
+
+            ArrayList<String> enrolledStudents = enrolledCourse.getStudentNames();
+            enrolledStudents.remove(student.getName());
+            String removedStudents = String.join(",", enrolledStudents);
+
+            pstmt.setString(1, removedStudents);
+            pstmt.setString(2, enrolledCourse.getCourseID());
+            pstmt.executeUpdate();
+
+            ArrayList<String> transferredStudents = transferCourse.getStudentNames();
+            transferredStudents.add(student.getName());
+            String addedStudents = String.join(",", enrolledStudents);
+
+            pstmt2.setString(1, addedStudents);
+            pstmt2.setString(2, transferCourse.getCourseID());
+            pstmt2.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Query error: " + e.getMessage());
+        }
+    }
+
 }

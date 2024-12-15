@@ -66,6 +66,8 @@ public class Admin {
                     student.getCourses().remove(enrolledCourse);
                     transferCourse.getEnrolledStudentsList().remove(student);
                     enrolledCourse.getEnrolledStudentsList().add(student);
+
+                    CourseDataAccessObject.updateForTransferringStudent(enrolledCourse, transferCourse, student);
                 }
 
             } else {
@@ -74,7 +76,7 @@ public class Admin {
         } else {
             System.out.println("Transfer failed: Either the student is not enrolled in the course or already transferred.");
         }
-        //TODO SQL Update
+        //TODO: bu da tamam metodu doğru yerde mi çağırıyorum bilemedim ve yine denemedim :((
     }
 
     //TODO: COURSENUN CLASSROOMU, COURSEUN STUDENT LİSTİ, CLASSROOMUN CAPACİTYSİ,
