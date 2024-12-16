@@ -4,7 +4,6 @@ module com.example.demo {
     requires javafx.web;
     requires javafx.swing;
 
-
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires net.synedra.validatorfx;
@@ -14,7 +13,6 @@ module com.example.demo {
     requires com.almasb.fxgl.all;
     requires java.rmi;
     requires java.sql;
-
 
     opens com.example.demo to javafx.fxml;
     exports com.example.demo;

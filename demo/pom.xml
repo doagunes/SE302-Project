@@ -75,15 +75,35 @@
       <artifactId>bootstrapfx-core</artifactId>
       <version>0.4.0</version>
     </dependency><dependency>
+    <groupId>eu.hansolo</groupId>
+    <artifactId>tilesfx</artifactId>
+    <version>17.1.17</version>
+    <exclusions>
+      <exclusion>
+        <groupId>org.openjfx</groupId>
+        <artifactId>*</artifactId>
+      </exclusion>
+    </exclusions>
+  </dependency>
+    <dependency>
+      <groupId>eu.hansolo.fx</groupId>
+      <artifactId>countries</artifactId>
+      <version>17.0.23</version>
+    </dependency>
+    <dependency>
+      <groupId>eu.hansolo.fx</groupId>
+      <artifactId>heatmap</artifactId>
+      <version>17.0.12</version>
+    </dependency>
+    <dependency>
       <groupId>eu.hansolo</groupId>
-      <artifactId>tilesfx</artifactId>
-      <version>17.1.17</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.openjfx</groupId>
-          <artifactId>*</artifactId>
-        </exclusion>
-      </exclusions>
+      <artifactId>toolboxfx</artifactId>
+      <version>17.0.33</version>
+    </dependency>
+    <dependency>
+      <groupId>eu.hansolo</groupId>
+      <artifactId>toolbox</artifactId>
+      <version>17.0.35</version>
     </dependency><dependency>
       <groupId>com.github.almasb</groupId>
       <artifactId>fxgl</artifactId>
@@ -106,7 +126,14 @@
       <artifactId>junit-jupiter-engine</artifactId>
       <version>${junit.version}</version>
       <scope>test</scope>
-    </dependency>  </dependencies>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.10.2</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
 
   <build>
     <plugins>
