@@ -28,7 +28,7 @@ public class Admin {
             Classroom cls = course.getAssignedClassroom();
             if(!student.getCourses().contains(course)) {
                 if(cls.getCapacity() > course.getEnrolledStudentsList().size()) {
-                    if(student.isAvaiable(course)){
+                    if(student.isAvailable(course)){
                         student.getCourses().add(course);
                         course.getEnrolledStudentsList().add(student);
                         CourseDataAccessObject.updateForAddingStudentToCourse(course, student); // buraya ekledimmm <3
@@ -64,11 +64,11 @@ public class Admin {
 
         if(student.getCourses().contains(enrolledCourse) && !student.getCourses().contains(transferCourse)) {
             if(transferCourse.getAssignedClassroom().getCapacity() > transferCourse.getEnrolledStudentsList().size()) {
-                if(student.isAvaiable(enrolledCourse)){
+                if(student.isAvailable(enrolledCourse)){
                     student.getCourses().add(transferCourse);
                     student.getCourses().remove(enrolledCourse);
-                    transferCourse.getEnrolledStudentsList().remove(student);
-                    enrolledCourse.getEnrolledStudentsList().add(student);
+                    enrolledCourse.getEnrolledStudentsList().remove(student);
+                    transferCourse.getEnrolledStudentsList().add(student);
 
                     CourseDataAccessObject.updateForTransferringStudent(enrolledCourse, transferCourse, student); // buraya ekledimm
                     //TODO: bu da tamam metodu doğru yerde mi çağırıyorum bilemedim ve yine denemedim :((
