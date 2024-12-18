@@ -6,36 +6,54 @@ import java.util.Map;
 
 public class Student extends Person{
     private static Map<String, Student> studentsByName = new HashMap<>();
-    private ArrayList<Course> courses;
+    private Map<Course, Integer> absenceCountByCourse = new HashMap<>();  // Her dersin devamsızlık sayısı
 
     public Student(String name) {
         super(name);
     }
 
     public static Student findStudentByName(String name) {
-        // If student exists, return it
+        // Eğer öğrenci varsa, döndür
         if (studentsByName.containsKey(name)) {
             return studentsByName.get(name);
         }
 
-        // Otherwise, create a new one and store it in the map
+        // Aksi takdirde yeni bir öğrenci oluştur ve map'e ekle
         Student student = new Student(name);
         studentsByName.put(name, student);
         return student;
     }
 
+    public int getAbsenceCountForCourse(Course course) {
+        //TODO SQL'dan çekilcek veri
+        return absenceCountByCourse.getOrDefault(course, 0);
+    }
+
+    public void incrementAbsenteeismForCourse(Course course) {
+        int currentCount = absenceCountByCourse.getOrDefault(course, 0);
+        absenceCountByCourse.put(course, currentCount + 1);
+    }
+
+    public void markAttendanceForCourse(Course course, boolean isPresent) {
+        Attendance attendance = new Attendance(isPresent, course.getStartTime(), course.getCourseDay(), this, course);
+        if (!isPresent) {
+            incrementAbsenteeismForCourse(course);  // Devamsızlık olduğunda sayıyı artır
+        }
+        course.getAttendanceRecordList().add(attendance);  // Attendance kaydını derse ekle
+    }
 
 
-
-    @Override
-    public void add() {}
-
-    @Override
-    public void remove() {}
-
-    @Override
-    public Student update(Object obj) {
-        return null;
+    public boolean isAvailable(Course course){
+        for(Course c : getCourses()) {
+            // Check if the course day matches
+            if(c.getCourseDay() == course.getCourseDay()) {
+                // If the course times overlap, it's not available
+                if(!(c.getEndTime().isBefore(course.getStartTime()) || c.getStartTime().isAfter(course.getEndTime()))) {
+                    return false; // There's a conflict
+                }
+            }
+        }
+        return true; // No conflict found
     }
 
 }
