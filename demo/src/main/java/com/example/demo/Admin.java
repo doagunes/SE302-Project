@@ -28,12 +28,12 @@ public class Admin {
             Classroom cls = course.getAssignedClassroom();
             if(!student.getCourses().contains(course)) {
                 if(cls.getCapacity() > course.getEnrolledStudentsList().size()) {
-                    if(student.isAvailable(course)){
+                    //if(student.isAvailable(course)){
                         student.getCourses().add(course);
                         course.getEnrolledStudentsList().add(student);
                         CourseDataAccessObject.updateForAddingStudentToCourse(course, student); // buraya ekledimmm <3
                         //TODO: Yapıldı kontrol edilecek --> doa
-                    }
+                    //}
 
                 } else {
                     System.out.println("There is no space in the classroom.");
@@ -64,7 +64,7 @@ public class Admin {
 
         if(student.getCourses().contains(enrolledCourse) && !student.getCourses().contains(transferCourse)) {
             if(transferCourse.getAssignedClassroom().getCapacity() > transferCourse.getEnrolledStudentsList().size()) {
-                if(student.isAvailable(enrolledCourse)){
+                //if(student.isAvailable(enrolledCourse)){
                     student.getCourses().add(transferCourse);
                     student.getCourses().remove(enrolledCourse);
                     enrolledCourse.getEnrolledStudentsList().remove(student);
@@ -72,7 +72,7 @@ public class Admin {
 
                     CourseDataAccessObject.updateForTransferringStudent(enrolledCourse, transferCourse, student); // buraya ekledimm
                     //TODO: bu da tamam metodu doğru yerde mi çağırıyorum bilemedim ve yine denemedim :((
-                }
+                //}
 
             } else {
                 System.out.println("There is no space in the classroom.");
