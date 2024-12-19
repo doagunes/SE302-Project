@@ -95,9 +95,9 @@
     </MenuBar>
     <SplitPane dividerPositions="0.25111358574610243, 0.8012249443207127" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
-        <AnchorPane>
+        <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="222.0">
                <children>
-                  <VBox prefHeight="551.0" prefWidth="222.0">
+                  <VBox fillWidth="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="222.0" scaleShape="false">
                      <children>
                         <HBox prefHeight="65.0" prefWidth="222.0">
                            <children>
@@ -118,33 +118,48 @@
                   </VBox>
                </children>
         </AnchorPane>
-        <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
+        <ScrollPane fitToWidth="true" prefHeight="-1.0" prefWidth="-1.0">
           <content>
             <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="430.0">
               <children>
-                        <VBox prefHeight="551.0" prefWidth="463.0">
+                        <VBox prefHeight="551.0" prefWidth="487.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                      <Label alignment="CENTER" prefHeight="99.0" prefWidth="336.0" style="&#10;" text="View" textAlignment="CENTER" wrapText="false">
+                      <Label prefHeight="99.0" prefWidth="309.0" style="&#10;" text="Courses" wrapText="false">
                                  <font>
-                            <Font size="18.0" fx:id="x1" />
+                            <Font size="80.0" fx:id="x1" />
                                  </font>
-                                 <textFill>
-                            <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
-                                 </textFill>
                               </Label>
                               <HBox prefHeight="34.0" prefWidth="448.0">
                                  <children>
-                                    <TextField prefHeight="26.0" prefWidth="174.0" />
-                                    <Button mnemonicParsing="false" text="Button" />
-                                    <Button mnemonicParsing="false" text="Button" />
-                                    <Button mnemonicParsing="false" text="Button" />
+                                    <TextField HBox.hgrow="ALWAYS" />
+                                    <Button mnemonicParsing="false" text="Create">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button disable="true" mnemonicParsing="false" text="Edit">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button disable="true" mnemonicParsing="false" text="Delete">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Button>
                                  </children>
                               </HBox>
                               <TableView prefHeight="345.0" prefWidth="449.0">
                                 <columns>
-                                  <TableColumn prefWidth="75.0" text="C1" />
-                                  <TableColumn prefWidth="75.0" text="C2" />
+                                  <TableColumn editable="false" prefWidth="75.0" text="Course ID" />
+                                  <TableColumn editable="false" prefWidth="128.0" text="Course Name" />
+                                    <TableColumn editable="false" prefWidth="123.5" text="Lecturer" />
+                                    <TableColumn editable="false" prefWidth="122.5" text="Classroom" />
+                                    <TableColumn prefWidth="40.0" />
                                 </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
                               </TableView>
                            </children>
                         </VBox>
@@ -152,11 +167,7 @@
             </AnchorPane>
           </content>
         </ScrollPane>
-        <AnchorPane>
-          <children>
-            <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Details" textAlignment="CENTER" textFill="$x2" wrapText="false" />
-          </children>
-        </AnchorPane>
+        <AnchorPane prefHeight="551.0" prefWidth="177.0" />
       </items>
     </SplitPane>
     <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
