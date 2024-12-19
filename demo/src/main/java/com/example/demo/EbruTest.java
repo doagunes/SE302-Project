@@ -14,26 +14,30 @@ public class EbruTest {
             ArrayList<Course> courses = rdr.readCourses();
             ArrayList<Classroom> classrooms = rdr.readClassrooms();
             Admin admin = new Admin();
-            Course se115 = courses.get(0);
-           for(Course course : courses){
-               course.assignClassroom(classrooms);
-           }
 
-           for(Classroom classroom : classrooms){
+            for(Course course : courses){
+                course.assignClassroom(classrooms);
+            }
+            System.out.println("************************");
+            Course classidegisecek = courses.get(4);
+            System.out.println(classidegisecek.getCourseID() + " " + classidegisecek.getAssignedClassroom().getClassroomName());
 
-               System.out.println(classroom.getClassroomName() + " " + classroom.getCapacity());
-           }
+            /*
+            for(Classroom classroom : classrooms){
 
-           for(Classroom classroom : classrooms){
-               if(classroom.getCapacity() >= 70){
-                   admin.changeClassroom(se115,classroom);
-                   break;
-               }
-           }
+                System.out.println(classroom.getClassroomName() + " " + classroom.getCapacity());
+            }*/
 
-           int stdNmb = courses.get(0).getEnrolledStudentsList().size(); //se115in
-            System.out.println(stdNmb);
-            System.out.println(se115.getCourseID() + " " + se115.getAssignedClassroom().getClassroomName());
+            for(Classroom classroom : classrooms){
+                if(classroom.getCapacity() >= classidegisecek.getEnrolledStudentsList().size()){
+                    //admin.changeClassroom(classidegisecek,classroom);
+                    //break;
+                }
+            }
+
+            //System.out.println(classidegisecek.getCourseID() + " " + classidegisecek.getAssignedClassroom().getClassroomName());
+
+
 
 
         }
