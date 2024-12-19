@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -180,6 +183,27 @@ public class AttendenceDatabase {
 
         return studentsOfCourse;
     }
+    public static ObservableList<AttendanceStudents> getAttendanceStudents() {
+        ObservableList<AttendanceStudents> attendance_students = FXCollections.observableArrayList();
+        try (Connection conn = DatabaseConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM Attendance")) {
+
+            while (rs.next()) {
+                attendance_students.add(new AttendanceStudents(
+                        rs.getInt("attendance_id"),
+                        rs.getInt("student_id"),
+                        rs.getString("student_name"),
+                        rs.getString("course_name"),
+                        rs.getInt("absence_count")
+                ));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return attendance_students;
+    }
+
 
 
 }
