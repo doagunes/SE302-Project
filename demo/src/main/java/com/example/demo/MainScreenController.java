@@ -7,6 +7,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -16,16 +19,39 @@ public class MainScreenController {
 
     @FXML
     private void about() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("CAUTION !!");
-        alert.setHeaderText(null);
-        alert.setContentText("Add a book to the catalog by pressing the menubar-->Add\n" +
-                "Save the current state of the catalog by pressing the menubar-->Save\n" +
-                "Export your catalog by pressing the menubar-->Export All\n" +
-                "Export the selected book by pressing the menubar-->Export Selected\n" +
-                "Import a saved catalog by pressing the menubar-->Open File");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("About Syllabus App");
+        alert.setHeaderText("How to Use the Syllabus App");
+
+        // Create the main content text
+        String aboutText = "Welcome to the Syllabus App!\n\n" +
+                "Here are the key functionalities:\n" +
+                "1. View Weekly Schedule: Check your courses and activities for the week.\n" +
+                "2. Add Courses: Add new courses to your schedule using the 'Add Course' option.\n" +
+                "3. Remove Courses: Remove courses from your schedule by selecting them.\n" +
+                "4. Export Schedule: Save your current schedule as a file for later use.\n" +
+                "5. Import Schedule: Load a previously saved schedule file.\n\n" +
+                "For more details, visit our website:\n";
+
+        // Create a Hyperlink
+        Hyperlink hyperlink = new Hyperlink("https://www.youtube.com"); // Replace with your URL
+        hyperlink.setOnAction(event -> {
+            MainScreen.getHostServicesInstance().showDocument(hyperlink.getText());
+        });
+
+        // Combine the text and hyperlink into a VBox
+        VBox content = new VBox();
+        Text text = new Text(aboutText);
+        content.getChildren().addAll(text, hyperlink);
+        content.setSpacing(10);
+
+        // Set the VBox as the content of the dialog
+        alert.getDialogPane().setContent(content);
+
         alert.showAndWait();
     }
+
+
 
     @FXML
     private Button CourseBtn;
@@ -57,5 +83,67 @@ public class MainScreenController {
         stage.showAndWait();
 
     }
+
+    @FXML
+    private void startStudentPage () throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StudentsManagement.fxml"));
+        Parent root = fxmlLoader.load();
+
+
+
+        //yeni stage oluştur ve .fxml'i göster
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Course Management");
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
+
+    }
+    @FXML
+    private void startLecturerPage () throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StudentsManagement.fxml"));
+        Parent root = fxmlLoader.load();
+
+
+
+        //yeni stage oluştur ve .fxml'i göster
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Course Management");
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
+
+    }
+    @FXML
+    private void startClassroomPage () throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ClassroomsManagement.fxml"));
+        Parent root = fxmlLoader.load();
+
+
+
+        //yeni stage oluştur ve .fxml'i göster
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Course Management");
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
+
+    }
+    @FXML
+    private void startAttendancePage () throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AttendanceManagement.fxml"));
+        Parent root = fxmlLoader.load();
+
+
+
+        //yeni stage oluştur ve .fxml'i göster
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Course Management");
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
+
+    }
+
 
 }
