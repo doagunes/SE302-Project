@@ -41,17 +41,20 @@ public class İlaydaTest {
             for(Course courses : lecturerCourses) {
                 System.out.println(courses.getCourseID());
             }
-            System.out.println("");
-            for(Course courses : studentCourses) {
-                System.out.println(courses.getCourseID());
+
+            Course se302 = courseList.get(2);
+            admin.addStudentToCourse(se302, courseList.get(0).getEnrolledStudentsList().get(0));
+
+
+
+            for(Course crs : courseList.get(0).getEnrolledStudentsList().get(0).getCourses()) {
+                System.out.println(crs.getCourseID());
             }
 
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
 
     }
 }
