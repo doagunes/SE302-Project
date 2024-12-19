@@ -41,7 +41,24 @@ public class CourseDataAccessObject {
         }
     }
 
-    //TODO user yeni bir kurs ekleyeceği zaman addNewCourse methodu lazım
+    //TODO: yapıldı ama check edilmesi lazımm :)))))!!!!
+    public void addNewCourse(Course newCourse){
+        String sql = "INSERT OR IGNORE INTO Course(Course, TimeToStart, DurationInLectureHours, Lecturer, Students) VALUES (?, ?, ?, ?, ?)";
+        try(Connection conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+                pstmt.setString(1, newCourse.getCourseID());
+                pstmt.setString(2, newCourse.getTimeToStart());
+                pstmt.setInt(3, newCourse.getDuration());
+                pstmt.setString(4, newCourse.getLecturerName());
+                String studentsAsString = String.join(",", newCourse.getStudentNames());
+                pstmt.setString(5, studentsAsString);
+                pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void addCourse(ArrayList<Course> courses){ //csv'deki verileri kullanıyor
 
 
@@ -78,14 +95,6 @@ public class CourseDataAccessObject {
                 AllCourses.add(new Course(rs.getString("Course"), rs.getString("TimeToStart"),
                         rs.getInt("DurationInLectureHours"), rs.getString("Lecturer"), studentsInCourse));
 
-                /*
-                System.out.println("Course: " + rs.getString("Course") +
-                        ", TimeToStart: " + rs.getString("TimeToStart") +
-                        ", DurationInLectureHours: " + rs.getInt("DurationInLectureHours") +
-                        ", Lecturer: " + rs.getString("Lecturer") +
-                        ", Students: " + rs.getString("Students"));
-
-                 */
             }
 
         } catch (SQLException e) {
@@ -103,10 +112,10 @@ public class CourseDataAccessObject {
         return studentList;
     }
 
-    //TODO Öğretmen ve öğrenciye göre kursların çekidleiği methodun return parametesi Course olkucak!
-    public ArrayList<String> getCourseWhereLecturerIs(String lecturerName) {
-        ArrayList<String> courseIDs = new ArrayList<>();
-        String sql = "SELECT Course FROM Course WHERE Lecturer = ?";
+
+    public ArrayList<Course> getCourseWhereLecturerIs(String lecturerName) {
+        ArrayList<Course> courseIDs = new ArrayList<>();
+        String sql = "SELECT * FROM Course WHERE Lecturer = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -116,7 +125,11 @@ public class CourseDataAccessObject {
                 boolean hasResults = false;
                 while (rs.next()) {
                     hasResults = true;
-                    courseIDs.add(rs.getString("Course"));
+                    ArrayList<String> studentsInCourse = new ArrayList<>();
+                    String studentsString = rs.getString("Students");
+                    studentsInCourse = stringToArrayList(studentsString);
+                    courseIDs.add(new Course(rs.getString("Course"), rs.getString("TimeToStart"),
+                            rs.getInt("DurationInLectureHours"), rs.getString("Lecturer"), studentsInCourse));
 
                 }
                 if (!hasResults) {
@@ -128,27 +141,47 @@ public class CourseDataAccessObject {
         }
         return courseIDs;
     }
-    public ArrayList<String> getCoursesBasedOnStudent (String studentName) {
-        ArrayList<String> courseIDs = new ArrayList<>();
-        String sql = "SELECT Course FROM Course WHERE Students LIKE ?";
+
+    //TODO: bu kısımdan tam emin değilim kontrol edicemmmmmm <3 <3 <3 <3!!!
+    public ArrayList<Course> getCoursesBasedOnStudent(String studentName) {
+        ArrayList<Course> courses = new ArrayList<>();
+        String sql = "SELECT * FROM Course";
+
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
 
-            // '%studentName%' ifadesini SQL sorgusuna ekler.
-            pstmt.setString(1, "%" + studentName + "%");
+            boolean hasResults = false;
 
-            try (ResultSet rs = pstmt.executeQuery()) {
-                while (rs.next()) {
-                    courseIDs.add(rs.getString("Course"));
+            while (rs.next()) {
+
+                String studentsString = rs.getString("Students");
+                ArrayList<String> studentsInCourse = stringToArrayList(studentsString);
+
+
+                if (studentsInCourse.contains(studentName)) {
+                    hasResults = true;
+                    courses.add(new Course(
+                            rs.getString("Course"),
+                            rs.getString("TimeToStart"),
+                            rs.getInt("DurationInLectureHours"),
+                            rs.getString("Lecturer"),
+                            studentsInCourse
+                    ));
                 }
-
             }
+
+            if (!hasResults) {
+                System.out.println("No courses found for Student: " + studentName);
+            }
+
         } catch (SQLException e) {
             System.out.println("Query error: " + e.getMessage());
         }
-        return courseIDs;
-        //Helper method ile bu Course ID'leri Course objesine dönüştür arrayListin içinde.
+
+        return courses;
     }
+
 
 
 }
