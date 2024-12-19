@@ -1,0 +1,65 @@
+/* Genel AnchorPane arka plan stili */
+.anchor-pane {
+    -fx-background-color: linear-gradient(to bottom, #34495e, #2c3e50);
+    -fx-border-color: #16a085;
+    -fx-border-width: 3px;
+    -fx-border-radius: 15;
+    -fx-padding: 10;
+}
+
+/* Menü çubuğu stilleri */
+.menu-bar {
+    -fx-background-color: linear-gradient(to right, #1abc9c, #16a085);
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-border-color: #16a085;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10;
+    -fx-padding: 5px;
+    -fx-background-radius: 10;
+}
+.menu-bar .menu {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/* Düğme stilleri */
+.button {
+    -fx-background-color: linear-gradient(to bottom, #27ae60, #2ecc71);
+    -fx-text-fill: white;
+    -fx-font-size: 1.5em;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-weight: bold;
+    -fx-padding: 2%;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0.5, 0, 2);
+}
+.button:hover {
+    -fx-background-color: linear-gradient(to bottom, #2ecc71, #27ae60);
+}
+
+/* Label stilleri */
+.label {
+    -fx-font-size: 1.2em;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-text-fill: #ecf0f1;
+    -fx-font-weight: 500;
+}
+
+/* Menü öğesi stilleri */
+.menu-item {
+    -fx-font-size: 16px;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-text-fill: #ffffff;
+}
+
+/* Başlık yazıları için özel stiller */
+.heading {
+    -fx-font-size: 2em;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ecf0f1;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 2);
+}

@@ -28,6 +28,10 @@ public class MainScreen extends Application {
         hostServices = getHostServices();
         FXMLLoader fxmlLoader = new FXMLLoader(MainScreen.class.getResource("MainScreen.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1176, 875);
+
+        primaryStage.setMinWidth(400); // Minimum genişlik
+        primaryStage.setMinHeight(400); // Minimum yükseklik
+
         primaryStage.setTitle("Syllabus Application");
         primaryStage.setScene(scene);
         primaryStage.show();
