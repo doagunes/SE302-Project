@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane gridLinesVisible="true" hgap="5" prefHeight="387.0" prefWidth="443.0" style="-fx-padding: 10;" vgap="5" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21">
+    <!-- Günler Başlıkları -->
+    <Label style="-fx-font-weight: bold;" text="Mon" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    <Label style="-fx-font-weight: bold;" text="Tue" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+    <Label style="-fx-font-weight: bold;" text="Wed" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+    <Label style="-fx-font-weight: bold;" text="Thu" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+    <Label style="-fx-font-weight: bold;" text="Fri" GridPane.columnIndex="5" GridPane.rowIndex="0" />
+
+    <!-- Saatler -->
+    <Label text="08:30" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <Label text="09:25" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <Label text="10:20" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <Label text="11:15" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+    <Label text="12:10" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+    <Label text="13:05" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+    <Label text="14:00" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+    <Label text="14:55" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+    <Label text="15:50" GridPane.columnIndex="0" GridPane.rowIndex="9" />
+    <Label text="16:45" GridPane.columnIndex="0" GridPane.rowIndex="10" />
+    <Label text="17:40" GridPane.columnIndex="0" GridPane.rowIndex="11" />
+    <Label text="18:35" GridPane.columnIndex="0" GridPane.rowIndex="12" />
+    <Label text="19:30" GridPane.columnIndex="0" GridPane.rowIndex="13" />
+    <Label text="20:25" GridPane.columnIndex="0" GridPane.rowIndex="14" />
+
+    <!-- Tablo Hücreleri -->
+    <!-- Boş hücreler için etiketsiz yerler -->
+    <Label text="CE 323-1\nC207" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    <Label text="CE 323-1\nC207" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    <Label text="CE 323-1\nC207" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    <Label text="OFFICE\nHOUR" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+    <Label text="CE 323-2\nC508" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+    <Label text="CE 323-2\nC508" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+    <Label text="CE 323-2\nC508" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+    <Label text="OFFICE\nHOUR" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+
+    <Label text="FENG 497" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+    <Label text="FENG 497" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+    <Label text="FENG 497" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+
+    <Label text="CE 601\nE503" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+    <Label text="CE 601\nE503" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+    <Label text="CE 601\nE503" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints maxHeight="34.0" minHeight="20.0" prefHeight="20.0" />
+      <RowConstraints maxHeight="14.0" minHeight="0.0" prefHeight="14.0" />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+</GridPane>

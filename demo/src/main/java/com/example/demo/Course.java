@@ -1,11 +1,8 @@
 package com.example.demo;
 
-import com.almasb.fxgl.core.collection.Array;
-
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
 
 public class Course {
@@ -44,32 +41,55 @@ public class Course {
 
     }
 
+    public static ArrayList<Classroom> findSuitableClassrooms(Course course, ArrayList<Classroom> classrooms) {
+        ArrayList<Classroom> suitableClassrooms = new ArrayList<>();
+
+        // Kurs bilgilerini al
+        int studentCount = course.getEnrolledStudentsList().size();
+        String courseDay = course.getCourseDay();
+        LocalTime startTime = course.getStartTime();
+        LocalTime endTime = course.getEndTime();
+
+        // Her sınıfı kontrol et
+        for (Classroom classroom : classrooms) {
+            // Kapasite ve zaman uygunluğunu kontrol et
+            if (classroom.getCapacity() >= studentCount &&
+                    classroom.isAvailable(courseDay, startTime, endTime)) {
+                suitableClassrooms.add(classroom);
+            }
+        }
+
+        return suitableClassrooms;
+    }
+
     public void assignClassroom(ArrayList<Classroom> classrooms) {
-        //TODO Kapasiteler Sql dan çekilcek
+        // Kontrol: Sınıf listesi boş veya null ise
         if (classrooms == null || classrooms.isEmpty()) {
             System.out.println("No classrooms available for assignment.");
             return;
         }
 
-        int studentCount = this.getEnrolledStudentsList().size();
-        String courseDay = this.courseDay;
-        LocalTime startTime = this.startTime;
-        LocalTime endTime = this.endTime;
+        // Uygun sınıfları bul
+        ArrayList<Classroom> suitableClassrooms = findSuitableClassrooms(this, classrooms);
 
-        classrooms.sort(Comparator.comparingInt(Classroom::getCapacity).reversed());
-
-        // En büyük kapasiteye sahip olan sınıflar arasından uygun olanı bul
-        for (Classroom classroom : classrooms) {
-            if (classroom.getCapacity() >= studentCount && classroom.isAvailable(courseDay, startTime, endTime)) {
-                this.assignedClassroom = classroom;
-                classroom.getCourses().add(this);
-                System.out.println(this.getCourseID() + ": " + classroom.getClassroomName() + " " + classroom.getCapacity()); //test için
-                System.out.println(this.getCourseDay() + "-" + this.getStartTime() + "-" + this.getEndTime(this.getStartTime())); //test için
-                return;
-            }
+        // Kontrol: Uygun sınıf yoksa
+        if (suitableClassrooms.isEmpty()) {
+            System.out.println("No suitable classroom found for course: " + this.getCourseID());
+            return;
         }
 
-        System.out.println("No suitable classroom found for course: " + this.getCourseID());
+        // Kapasiteye göre en büyükten küçüğe sırala ve ilk uygun sınıfı seç
+        suitableClassrooms.sort(Comparator.comparingInt(Classroom::getCapacity).reversed());
+        Classroom assignedClassroom = suitableClassrooms.get(0);
+
+        // Sınıfı ata ve kursu sınıfın ders listesine ekle
+        this.assignedClassroom = assignedClassroom;
+        assignedClassroom.getCourses().add(this);
+
+        // Test için log yazdır
+        System.out.println(this.getCourseID() + ": Assigned to " + assignedClassroom.getClassroomName() +
+                " (Capacity: " + assignedClassroom.getCapacity() + ")");
+        System.out.println(this.getCourseDay() + " " + this.getStartTime() + " - " + this.getEndTime(this.getStartTime()));
     }
 
     //TODO: BU CREATELER SİLİNEBİLİR :o
