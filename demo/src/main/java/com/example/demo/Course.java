@@ -36,10 +36,9 @@ public class Course {
         this.startTime = LocalTime.parse(timeParts[1], DateTimeFormatter.ofPattern("H:mm"));
         this.endTime = this.getEndTime(startTime);
 
-        this.lecturer = createLecturer(lecturerName);
-        this.lecturer.getCourses().add(this);
-
-        this.enrolledStudentsList = createStudents(studentNames);
+        createLecturer(lecturerName);
+        this.enrolledStudentsList = new ArrayList<>();
+        createStudents(studentNames);
         this.attendanceRecordList = new ArrayList<>();
         courseDAO = new CourseDataAccessObject();
 
@@ -74,18 +73,37 @@ public class Course {
     }
 
     //TODO: BU CREATELER SİLİNEBİLİR :o
-    public Lecturer createLecturer(String lecturerName) {
-        return Lecturer.findLecturerByName(lecturerName);
+    public void createLecturer(String lecturerName) {
+        lecturer = Lecturer.findLecturerByName(lecturerName);
+
+        // Eğer ders adı zaten hocanın ders listesinde varsa ekleme
+        boolean courseExists = lecturer.getCourses().stream()
+                .anyMatch(course -> course.getCourseID().equals(this.getCourseID()));
+
+        if (!courseExists) {
+            lecturer.getCourses().add(this);
+            System.out.println(lecturerName + " " + this.getCourseID() + " dersine eklendi.");
+        } else {
+            System.out.println(this.getCourseID() + " dersi zaten hocanın ders listesinde.");
+        }
     }
 
-    public ArrayList<Student> createStudents(ArrayList<String> studentNames) {
-        ArrayList<Student> students = new ArrayList<>();
+    public void createStudents(ArrayList<String> studentNames) {
         for (String studentName : studentNames) {
             Student student = Student.findStudentByName(studentName);
-            students.add(student);
-            student.getCourses().add(this);
+
+            // Eğer öğrenci zaten bu dersi alıyorsa, ekleme
+            boolean courseExists = student.getCourses().stream()
+                    .anyMatch(course -> course.getCourseID().equals(this.getCourseID()));
+
+            if (!courseExists) {
+                student.getCourses().add(this); // Öğrenciye dersi ekle
+                System.out.println(studentName + " " + this.getCourseID() + " dersine eklendi.");
+            } else {
+                System.out.println(this.getCourseID() + " dersi zaten " + studentName + "'in ders listesinde.");
+            }
+            this.enrolledStudentsList.add(student);
         }
-        return students;
     }
 
     public LocalTime getEndTime(LocalTime startTime) {
