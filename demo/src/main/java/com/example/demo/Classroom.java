@@ -45,9 +45,15 @@ public class Classroom {
         return classroomDAO.getClassrooms();
     }
 
+    /*
     public int getCapacity() {
         return classroomDAO.getCapacityWhereClassroomIs(classroomName);
+    }*/
+
+    public int getCapacity() {
+        return capacity;
     }
+
 
     public ArrayList<Course> getCourses() {
         return courses;

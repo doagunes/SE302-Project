@@ -28,10 +28,12 @@ public class Admin {
             Classroom cls = course.getAssignedClassroom();
             if(!student.getCourses().contains(course)) {
                 if(cls.getCapacity() > course.getEnrolledStudentsList().size()) {
-                    if(student.isAvaiable(course)){
+                    //if(student.isAvailable(course)){
                         student.getCourses().add(course);
                         course.getEnrolledStudentsList().add(student);
-                    }
+                        CourseDataAccessObject.updateForAddingStudentToCourse(course, student); // buraya ekledimmm <3
+                        //TODO: Yapıldı kontrol edilecek --> doa
+                    //}
 
                 } else {
                     System.out.println("There is no space in the classroom.");
@@ -41,17 +43,20 @@ public class Admin {
             }
         }
 
-        //TODO öğrenci yeni kursa geçince sql update!
+
     }
 
     public void removeStudentFromCourse(Course course, Student student) {
         if(student.getCourses().contains(course)) {
             student.getCourses().remove(course);
             course.getEnrolledStudentsList().remove(student);
+
+            CourseDataAccessObject.updateForRemovingStudent(course, student); // buraya ekledimm
+            // TODO : update işlemini yaptım fakat denenmedi !!! <3 doa
         } else {
             System.out.println("Transfer failed: The student is not enrolled in this course.");
         }
-        //TODO SQL UPDATE
+
     }
 
     public void transferStudentToAnotherCourse(Course enrolledCourse, Course transferCourse, Student student) {
@@ -59,12 +64,15 @@ public class Admin {
 
         if(student.getCourses().contains(enrolledCourse) && !student.getCourses().contains(transferCourse)) {
             if(transferCourse.getAssignedClassroom().getCapacity() > transferCourse.getEnrolledStudentsList().size()) {
-                if(student.isAvaiable(enrolledCourse)){
+                //if(student.isAvailable(enrolledCourse)){
                     student.getCourses().add(transferCourse);
                     student.getCourses().remove(enrolledCourse);
-                    transferCourse.getEnrolledStudentsList().remove(student);
-                    enrolledCourse.getEnrolledStudentsList().add(student);
-                }
+                    enrolledCourse.getEnrolledStudentsList().remove(student);
+                    transferCourse.getEnrolledStudentsList().add(student);
+
+                    CourseDataAccessObject.updateForTransferringStudent(enrolledCourse, transferCourse, student); // buraya ekledimm
+                    //TODO: bu da tamam metodu doğru yerde mi çağırıyorum bilemedim ve yine denemedim :((
+                //}
 
             } else {
                 System.out.println("There is no space in the classroom.");
@@ -72,7 +80,7 @@ public class Admin {
         } else {
             System.out.println("Transfer failed: Either the student is not enrolled in the course or already transferred.");
         }
-        //TODO SQL Update
+
     }
 
     //TODO: COURSENUN CLASSROOMU, COURSEUN STUDENT LİSTİ, CLASSROOMUN CAPACİTYSİ,

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class ClassroomDataAccessObject {
 
 
-    public void createTable() {
+    public static void createTable() {
 
     /*
         String sql2 = "DROP TABLE IF EXISTS Classroom";
@@ -38,7 +38,7 @@ public class ClassroomDataAccessObject {
         }
     }
 
-    public void addClassroom(ArrayList<Classroom> classrooms) {
+    public static void addClassroom(ArrayList<Classroom> classrooms) {
         String sql = "INSERT OR IGNORE INTO Classroom (Classroom, Capacity) VALUES (?, ?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -53,7 +53,7 @@ public class ClassroomDataAccessObject {
         }
     }
 
-    public ArrayList<Classroom> getClassrooms() {
+    public static ArrayList<Classroom> getClassrooms() {
         ArrayList<Classroom> allClassroom = new ArrayList<>();
         String sql = "SELECT * FROM Classroom";
         try (Connection conn = DatabaseConnection.getConnection();
@@ -71,7 +71,7 @@ public class ClassroomDataAccessObject {
     }
 
 
-    public int getCapacityWhereClassroomIs(String classroomName) {
+    public static int getCapacityWhereClassroomIs(String classroomName) {
         int capacity = 0;
         String sql = "SELECT Capacity FROM Classroom WHERE Classroom = ?";
         try (Connection conn = DatabaseConnection.getConnection();

@@ -43,16 +43,17 @@ public class Student extends Person{
     }
 
 
-    public boolean isAvaiable(Course course){
-        for(Course c : getCourses() ){
-            if(c.getCourseDay() == course.getCourseDay()){
-                if(c.getEndTime().isAfter(course.getStartTime())){
-                    return true;
-                }else if(c.getStartTime().isAfter(course.getEndTime())){
-                    return true;
+    public boolean isAvailable(Course course){
+        for(Course c : getCourses()) {
+            // Check if the course day matches
+            if(c.getCourseDay() == course.getCourseDay()) {
+                // If the course times overlap, it's not available
+                if(!(c.getEndTime().isBefore(course.getStartTime()) || c.getStartTime().isAfter(course.getEndTime()))) {
+                    return false; // There's a conflict
                 }
             }
         }
-       return false;
+        return true; // No conflict found
     }
+
 }

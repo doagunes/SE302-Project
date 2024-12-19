@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class CourseDataAccessObject {
 
-    public void createTable() {
+    public static void createTable() {
 
         /*
         String sql2 = "DROP TABLE IF EXISTS Course";
@@ -42,7 +42,7 @@ public class CourseDataAccessObject {
     }
 
     //TODO: yapıldı ama check edilmesi lazımm :)))))!!!!
-    public void addNewCourse(Course newCourse){
+    public static void addNewCourse(Course newCourse){
         String sql = "INSERT OR IGNORE INTO Course(Course, TimeToStart, DurationInLectureHours, Lecturer, Students) VALUES (?, ?, ?, ?, ?)";
         try(Connection conn = DatabaseConnection.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -59,7 +59,7 @@ public class CourseDataAccessObject {
         }
     }
 
-    public void addCourse(ArrayList<Course> courses){ //csv'deki verileri kullanıyor
+    public static void addCourse(ArrayList<Course> courses){ //csv'deki verileri kullanıyor
 
 
         String sql = "INSERT OR IGNORE INTO Course(Course, TimeToStart, DurationInLectureHours, Lecturer, Students) VALUES (?, ?, ?, ?, ?)";
@@ -81,7 +81,7 @@ public class CourseDataAccessObject {
         }
     }
 
-    public ArrayList<Course> getCourses(){
+    public static ArrayList<Course> getCourses(){
         ArrayList<Course> AllCourses = new ArrayList<>();
         String sql = "SELECT * FROM Course";
         try (Connection conn = DatabaseConnection.getConnection();
@@ -103,7 +103,7 @@ public class CourseDataAccessObject {
         return AllCourses;
     }
     // Helper method to convert a comma-separated String to an ArrayList
-    private ArrayList<String> stringToArrayList(String students) {
+    private static ArrayList<String> stringToArrayList(String students) {
         ArrayList<String> studentList = new ArrayList<>();
         if (students != null && !students.isEmpty()) {
             // Virgülle ayrılmış String'i parçalayarak bir ArrayList'e çevir
@@ -113,7 +113,7 @@ public class CourseDataAccessObject {
     }
 
 
-    public ArrayList<Course> getCourseWhereLecturerIs(String lecturerName) {
+    public static ArrayList<Course> getCourseWhereLecturerIs(String lecturerName) {
         ArrayList<Course> courseIDs = new ArrayList<>();
         String sql = "SELECT * FROM Course WHERE Lecturer = ?";
         try (Connection conn = DatabaseConnection.getConnection();
@@ -143,7 +143,7 @@ public class CourseDataAccessObject {
     }
 
     //TODO: bu kısımdan tam emin değilim kontrol edicemmmmmm <3 <3 <3 <3!!!
-    public ArrayList<Course> getCoursesBasedOnStudent(String studentName) {
+    public static ArrayList<Course> getCoursesBasedOnStudent(String studentName) {
         ArrayList<Course> courses = new ArrayList<>();
         String sql = "SELECT * FROM Course";
 
@@ -154,10 +154,8 @@ public class CourseDataAccessObject {
             boolean hasResults = false;
 
             while (rs.next()) {
-
                 String studentsString = rs.getString("Students");
                 ArrayList<String> studentsInCourse = stringToArrayList(studentsString);
-
 
                 if (studentsInCourse.contains(studentName)) {
                     hasResults = true;
@@ -182,6 +180,73 @@ public class CourseDataAccessObject {
         return courses;
     }
 
+    public static void updateForAddingStudentToCourse(Course course, Student student){
+        String sql = "UPDATE Course SET Students =? WHERE Course =?";
+
+        try(Connection conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            ArrayList<String> currentStudents = course.getStudentNames();
+            currentStudents.add(student.getName());
+            String addedStudents = String.join(",", currentStudents);
+
+            pstmt.setString(1, addedStudents);
+            pstmt.setString(2, course.getCourseID());
+
+        } catch (SQLException e) {
+            System.out.println("Query error: " + e.getMessage());
+        }
+    }
+
+    public static void updateForRemovingStudent(Course course, Student student){
+        String sql = " UPDATE Course SET Students =? WHERE Course =? ";
+
+        try(Connection conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            ArrayList<String> currentStudents = course.getStudentNames();
+            currentStudents.remove(student.getName());
+            String updatedStudents = String.join(",", currentStudents);
+
+            pstmt.setString(1, updatedStudents);
+            pstmt.setString(2, course.getCourseID());
+
+            pstmt.executeUpdate();
+            System.out.println("Student removed from course in the database.");
+
+        } catch (SQLException e) {
+            System.out.println("Query error: " + e.getMessage());
+        }
+    }
+
+    public static void updateForTransferringStudent(Course enrolledCourse, Course transferCourse, Student student){
+        String sql = " UPDATE Course SET Students =? WHERE Course =? ";
+        String sql2 = " UPDATE Course SET Students =? WHERE Course =? ";
+
+        try(Connection conn = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            PreparedStatement pstmt2 = conn.prepareStatement(sql2)){
+
+            ArrayList<String> enrolledStudents = enrolledCourse.getStudentNames();
+            enrolledStudents.remove(student.getName());
+            String removedStudents = String.join(",", enrolledStudents);
+
+            pstmt.setString(1, removedStudents);
+            pstmt.setString(2, enrolledCourse.getCourseID());
+            pstmt.executeUpdate();
+
+            ArrayList<String> transferredStudents = transferCourse.getStudentNames();
+            transferredStudents.add(student.getName());
+            String addedStudents = String.join(",", enrolledStudents);
+
+            pstmt2.setString(1, addedStudents);
+            pstmt2.setString(2, transferCourse.getCourseID());
+            pstmt2.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Query error: " + e.getMessage());
+        }
+    }
 
 
 }

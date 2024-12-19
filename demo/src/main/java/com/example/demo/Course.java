@@ -5,6 +5,7 @@ import com.almasb.fxgl.core.collection.Array;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 
 public class Course {
@@ -35,18 +36,14 @@ public class Course {
         this.startTime = LocalTime.parse(timeParts[1], DateTimeFormatter.ofPattern("H:mm"));
         this.endTime = this.getEndTime(startTime);
 
-        //TODO: Lecturer ve Students login yaptığında oluşturalım dedik. Login Interface geldiğinde burası değiştirilebilir.
-
-        this.lecturer = createLecturer(lecturerName);
-        this.lecturer.getCourses().add(this);
-
-        this.enrolledStudentsList = createStudents(studentNames);
+        createLecturer(lecturerName);
+        this.enrolledStudentsList = new ArrayList<>();
+        createStudents(studentNames);
         this.attendanceRecordList = new ArrayList<>();
         courseDAO = new CourseDataAccessObject();
 
-
     }
-    //TODO: DERSİN STUDENT LİSTİ VE TÜM CLASSROOMDS
+
     public void assignClassroom(ArrayList<Classroom> classrooms) {
         //TODO Kapasiteler Sql dan çekilcek
         if (classrooms == null || classrooms.isEmpty()) {
@@ -54,7 +51,7 @@ public class Course {
             return;
         }
 
-        int studentCount = this.getStudentNames().size();
+        int studentCount = this.getEnrolledStudentsList().size();
         String courseDay = this.courseDay;
         LocalTime startTime = this.startTime;
         LocalTime endTime = this.endTime;
@@ -76,18 +73,37 @@ public class Course {
     }
 
     //TODO: BU CREATELER SİLİNEBİLİR :o
-    public Lecturer createLecturer(String lecturerName) {
-        return Lecturer.findLecturerByName(lecturerName);
+    public void createLecturer(String lecturerName) {
+        lecturer = Lecturer.findLecturerByName(lecturerName);
+
+        // Eğer ders adı zaten hocanın ders listesinde varsa ekleme
+        boolean courseExists = lecturer.getCourses().stream()
+                .anyMatch(course -> course.getCourseID().equals(this.getCourseID()));
+
+        if (!courseExists) {
+            lecturer.getCourses().add(this);
+            System.out.println(lecturerName + " " + this.getCourseID() + " dersine eklendi.");
+        } else {
+            System.out.println(this.getCourseID() + " dersi zaten hocanın ders listesinde.");
+        }
     }
 
-    public ArrayList<Student> createStudents(ArrayList<String> studentNames) {
-        ArrayList<Student> students = new ArrayList<>();
+    public void createStudents(ArrayList<String> studentNames) {
         for (String studentName : studentNames) {
             Student student = Student.findStudentByName(studentName);
-            students.add(student);
-            student.getCourses().add(this);
+
+            // Eğer öğrenci zaten bu dersi alıyorsa, ekleme
+            boolean courseExists = student.getCourses().stream()
+                    .anyMatch(course -> course.getCourseID().equals(this.getCourseID()));
+
+            if (!courseExists) {
+                student.getCourses().add(this); // Öğrenciye dersi ekle
+                System.out.println(studentName + " " + this.getCourseID() + " dersine eklendi.");
+            } else {
+                System.out.println(this.getCourseID() + " dersi zaten " + studentName + "'in ders listesinde.");
+            }
+            this.enrolledStudentsList.add(student);
         }
-        return students;
     }
 
     public LocalTime getEndTime(LocalTime startTime) {
@@ -184,11 +200,25 @@ public class Course {
         this.enrolledStudentsList = enrolledStudentsList;
     }
 
+    @Override
+    public String toString() {
+        return "Course{" +
+               "courseID='" + courseID + '\'' +
+               ", timeToStart='" + timeToStart + '\'' +
+               ", duration=" + duration +
+               ", lecturerName='" + lecturerName +
+               '}';
+    }
+
     public ArrayList<Attendance> getAttendanceRecordList() {
         return attendanceRecordList;
     }
 
     public void setAttendanceRecordList(ArrayList<Attendance> attendanceRecordList) {
         this.attendanceRecordList = attendanceRecordList;
+    }
+
+    public ArrayList<Student> getStudents() {
+        return enrolledStudentsList;
     }
 }
