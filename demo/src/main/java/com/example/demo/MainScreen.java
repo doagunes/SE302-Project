@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -15,6 +16,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 public class MainScreen extends Application {
+    private static HostServices hostServices;
+
 
     public static void main(String[] args) {
         launch(args);
@@ -22,6 +25,7 @@ public class MainScreen extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        hostServices = getHostServices();
         FXMLLoader fxmlLoader = new FXMLLoader(MainScreen.class.getResource("MainScreen.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1176, 875);
         primaryStage.setTitle("Syllabus Application");
@@ -29,5 +33,8 @@ public class MainScreen extends Application {
         primaryStage.show();
 
 
+    }
+    public static HostServices getHostServicesInstance() {
+        return hostServices; // Controller sınıfı buradan erişebilir
     }
 }
