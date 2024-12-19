@@ -28,10 +28,13 @@ public class AttendenceDatabase {
         }
     }
     public static void createTables() {
+
+        //TODO Duplicate öğrenci probblem var
         String sql = """
             CREATE TABLE IF NOT EXISTS Students (
                 student_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                student_name TEXT NOT NULL\s
+                student_name TEXT NOT NULL,
+                UNIQUE (student_name)                               \s
                          );
         \s""";
 
