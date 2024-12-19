@@ -41,6 +41,13 @@ public class Course {
 
     }
 
+    public Course(String courseID, String timeToStart, int duration, String lecturerName) {
+        this.courseID = courseID;
+        this.timeToStart = timeToStart;
+        this.duration = duration;
+        this.lecturerName = lecturerName;
+    }
+
     public static ArrayList<Classroom> findSuitableClassrooms(Course course, ArrayList<Classroom> classrooms) {
         ArrayList<Classroom> suitableClassrooms = new ArrayList<>();
 

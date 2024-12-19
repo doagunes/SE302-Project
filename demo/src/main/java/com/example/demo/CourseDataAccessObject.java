@@ -1,5 +1,9 @@
 package com.example.demo;
 
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -101,6 +105,29 @@ public class CourseDataAccessObject {
             System.out.println("Query error: " + e.getMessage());
         }
         return AllCourses;
+    }
+
+    public static ObservableList<Course> getCoursesWithoutStudents(){
+        ObservableList<Course> coursesWithoutStudents = FXCollections.observableArrayList();
+        String sql = "SELECT Course, TimeToStart, DurationInLectureHours, Lecturer FROM Course";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+
+                coursesWithoutStudents.add(new Course(rs.getString("Course"), rs.getString("TimeToStart"),
+                        rs.getInt("DurationInLectureHours"), rs.getString("Lecturer")));
+
+            }
+            for(Course course : coursesWithoutStudents){
+                System.out.println(course.toString());
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Query error: " + e.getMessage());
+        }
+        return coursesWithoutStudents;
     }
     // Helper method to convert a comma-separated String to an ArrayList
     private static ArrayList<String> stringToArrayList(String students) {

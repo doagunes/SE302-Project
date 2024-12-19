@@ -26,17 +26,16 @@ public class DoaTest {
         CourseDataAccessObject courseDataAccessObject = new CourseDataAccessObject();
         courseDataAccessObject.createTable();
         courseDataAccessObject.addCourse(csv.readCourses());
-        //courseDataAccessObject.getCourses();
+        courseDataAccessObject.getCourses();
         //courseDataAccessObject.getCourseWhereLecturerIs("Turhan Tunalı");
+        /*
         ArrayList<Course> arr = courseDataAccessObject.getCoursesBasedOnStudent("DOĞA GÜNEŞ");
         for(Course course : arr){
             System.out.println(course.toString());
         }
 
+         */
 
-
-        AttendenceDatabase ad = new AttendenceDatabase();
-        ad.createTables();
 
 
     }
