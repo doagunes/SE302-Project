@@ -14,6 +14,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class MainScreenController {
 
@@ -70,8 +71,8 @@ public class MainScreenController {
 
     @FXML
     private void startCoursePage () throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CourseManagementfxml.fxml"));
-        Parent root = fxmlLoader.load();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ViewCourses.fxml"));
+       Parent root = fxmlLoader.load();
 
 
 
