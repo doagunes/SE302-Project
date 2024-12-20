@@ -48,7 +48,9 @@ public class Admin {
     }
 
     public void removeStudentFromCourse(Course course, Student student) {
+        System.out.println(student);
         if(student.getCourses().contains(course)) {
+            System.out.println("heyyyyyyyyooooooo");
             student.getCourses().remove(course);
             course.getEnrolledStudentsList().remove(student);
 
