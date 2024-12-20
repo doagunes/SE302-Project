@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="459.0" prefWidth="514.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="com.example.demo.ViewLecturersController">
+     <TableView fx:id="lecturerTableView" layoutX="52.0" prefHeight="459.0" prefWidth="412.0">
+         <columns>
+             <TableColumn fx:id="lecturerNameColumn" prefWidth="182.39996033906937" text="Lecturer Name" />
+             <TableColumn fx:id="viewScheduleColumn" prefWidth="225.6000213623047" text="View Schedule" />
+         </columns>
+     </TableView>
+</AnchorPane>

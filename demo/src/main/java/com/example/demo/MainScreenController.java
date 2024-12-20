@@ -102,7 +102,7 @@ public class MainScreenController {
     }
     @FXML
     private void startLecturerPage () throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LecturerManagement.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ViewLecturer.fxml"));
         Parent root = fxmlLoader.load();
 
 

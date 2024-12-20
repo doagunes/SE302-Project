@@ -302,4 +302,25 @@ public class CourseDataAccessObject {
         return allStudents;
     }
 
+    public static ArrayList<String> getLecturers() {
+        ArrayList<String> lecturers = new ArrayList<>();
+        String sql = "SELECT DISTINCT Lecturer FROM Course";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                String lecturerName = rs.getString("Lecturer");
+                if (!lecturers.contains(lecturerName)) {
+                    lecturers.add(lecturerName);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Query error: " + e.getMessage());
+        }
+
+        return lecturers;
+    }
+
 }
