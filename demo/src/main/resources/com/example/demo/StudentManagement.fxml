@@ -62,9 +62,9 @@
             <TableColumn fx:id="CoursesColumn" prefWidth="398.3999816894531" text="Courses" />
         </columns>
     </TableView>
-    <Button layoutX="462.0" layoutY="54.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="399.0" text="AddStudentToCourse" />
+    <Button fx:id="addStudentButton" layoutX="462.0" layoutY="54.0" mnemonicParsing="false" onAction="#OpenViewCoursesAdd" prefHeight="53.0" prefWidth="399.0" text="AddStudentToCourse" />
     <Button fx:id="removeStudentButton" layoutX="462.0" layoutY="116.0" mnemonicParsing="false" onAction="#handleRemoveStudentFromCourse" prefHeight="53.0" prefWidth="399.0" text="RemoveStudentFromCourse" />
-    <Button layoutX="462.0" layoutY="181.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="399.0" text="TransferStudentToAnotherCourse" />
+    <Button fx:id="transferStudentButton" layoutX="462.0" layoutY="181.0" mnemonicParsing="false" onAction="#OpenViewCoursesTransfer" prefHeight="53.0" prefWidth="399.0" text="TransferStudentToAnotherCourse" />
     <Label fx:id="studentNameLabel" alignment="CENTER" layoutX="-3.0" layoutY="-5.0" prefHeight="18.0" prefWidth="861.0" text="studentNameLabel" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <font>
             <Font size="16.0" />

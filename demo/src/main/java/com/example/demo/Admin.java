@@ -21,10 +21,6 @@ public class Admin {
 
     //TODO: PARAMETREDEKİ COURSE'UN CLASSROOMU VE STUDENT'IN COURSELARI
     public void addStudentToCourse(Course course, Student student) {
-
-        //TODO 1öğrenci yeni bir kursa eklencekken zaman çizelgesi o ders için uygun mu? kontrol edilcek
-        //TODO Yeni bir if eklenicek
-
         if(course.getAssignedClassroom() != null){
             Classroom cls = course.getAssignedClassroom();
             if(!student.getCourses().contains(course)) {
@@ -37,20 +33,19 @@ public class Admin {
                     //}
 
                 } else {
-                    System.out.println("There is no space in the classroom.");
+                    System.out.println("ADMIN There is no space in the classroom.");
                 }
             } else {
-                System.out.println("Transfer failed: The student is already enrolled in this course");
+                System.out.println("ADMIN Transfer failed: The student is already enrolled in this course");
             }
+        } else {
+            System.out.println("ADMIN Any classroom is assigned yet");
         }
-
 
     }
 
     public void removeStudentFromCourse(Course course, Student student) {
-        System.out.println(student);
         if(student.getCourses().contains(course)) {
-            System.out.println("heyyyyyyyyooooooo");
             student.getCourses().remove(course);
             course.getEnrolledStudentsList().remove(student);
 
@@ -85,9 +80,6 @@ public class Admin {
         }
 
     }
-
-
-
 
     //TODO: COURSENUN CLASSROOMU, COURSEUN STUDENT LİSTİ, CLASSROOMUN CAPACİTYSİ,
     public void changeClassroom(Course course, Classroom newClassroom) {

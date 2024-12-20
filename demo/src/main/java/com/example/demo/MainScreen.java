@@ -27,7 +27,6 @@ public class MainScreen extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-
         ArrayList<Course> courseList = CourseDataAccessObject.getCourses();
         ArrayList<Classroom> classroomsList = ClassroomDataAccessObject.getClassrooms();
         for (Course course : courseList) {
@@ -52,8 +51,6 @@ public class MainScreen extends Application {
         primaryStage.setTitle("Syllabus Application");
         primaryStage.setScene(scene);
         primaryStage.show();
-
-
 
     }
     public static HostServices getHostServicesInstance() {
