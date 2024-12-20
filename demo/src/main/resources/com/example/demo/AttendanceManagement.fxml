@@ -4,15 +4,15 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="555.0" prefWidth="748.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.AttendanceManagementController">
+<AnchorPane prefHeight="636.0" prefWidth="1003.0" stylesheets="@AttendanceStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.AttendanceManagementController">
     <children>
-        <TableView fx:id="tableView" layoutX="50.0" layoutY="50.0" prefHeight="400.0" prefWidth="600.0">
+        <TableView fx:id="tableView" layoutX="188.0" layoutY="165.0" prefHeight="429.0" prefWidth="627.0">
             <columns>
-                <TableColumn fx:id="idColumn" prefWidth="100.0" text="Attendance ID" />
-                <TableColumn fx:id="studentIdColumn" prefWidth="100.0" text="Student ID" />
-                <TableColumn fx:id="studentNameColumn" prefWidth="150.0" text="Student Name" />
-                <TableColumn fx:id="courseNameColumn" prefWidth="100.0" text="Course Name" />
-                <TableColumn fx:id="absenceCountColumn" prefWidth="100.0" text="Absence Count" />
+                <TableColumn fx:id="idColumn" prefWidth="126.0" text="Attendance ID" />
+                <TableColumn fx:id="studentIdColumn" prefWidth="123.0" text="Student ID" />
+                <TableColumn fx:id="studentNameColumn" prefWidth="122.0" text="Student Name" />
+                <TableColumn fx:id="courseNameColumn" prefWidth="116.0" text="Course Name" />
+                <TableColumn fx:id="absenceCountColumn" prefWidth="115.0" text="Absence Count" />
             </columns>
         </TableView>
     </children>
