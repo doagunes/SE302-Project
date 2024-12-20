@@ -57,6 +57,8 @@ public class StudentsController {
     private void handleStudentSelection(MouseEvent event) {
         // Get the selected student from the table
         selectedStudent = studentTableView.getSelectionModel().getSelectedItem();
+        selectedStudent.getCourses().addAll(CourseDataAccessObject.getCoursesBasedOnStudent(selectedStudent.getName()));
+        System.out.println(selectedStudent.getCourses().get(1));
         StudentManagementController.student = selectedStudent;
 
         // If a student is selected, open the StudentManagement.fxml
