@@ -26,6 +26,20 @@ public class MainScreen extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+
+        ArrayList<Course> courseList = CourseDataAccessObject.getCourses();
+        ArrayList<Classroom> classroomsList = ClassroomDataAccessObject.getClassrooms();
+        for (Course course : courseList) {
+            //System.out.println(course.getCourseID() + " " + course.getEnrolledStudentsList().size());
+            System.out.println(course + " " + course.getCourseID() + " " + AttendenceDatabase.studentsOfSpecificCourse(course).size());
+            course.assignClassroom(classroomsList);
+        }
+
+        ArrayList<Course> studentCourses = CourseDataAccessObject.getCoursesBasedOnStudent("DOĞA GÜNEŞ");
+        for(Course crs : studentCourses) {
+            System.out.println(crs + " " + crs.getCourseID());
+        }
         hostServices = getHostServices();
         FXMLLoader fxmlLoader = new FXMLLoader(MainScreen.class.getResource("MainScreen.fxml"));
         //FXMLLoader fxmlLoader = new FXMLLoader(MainScreen.class.getResource("Students.fxml"));
@@ -38,6 +52,7 @@ public class MainScreen extends Application {
         primaryStage.setTitle("Syllabus Application");
         primaryStage.setScene(scene);
         primaryStage.show();
+
 
 
     }

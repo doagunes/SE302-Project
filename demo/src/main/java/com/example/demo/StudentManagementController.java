@@ -75,7 +75,7 @@ public class StudentManagementController {
 
         // Öğrencinin CourseTableView'inden seçili kursu alıyoruz
         Course selectedCourse = courseTableView.getSelectionModel().getSelectedItem();
-
+        System.out.println(selectedCourse + selectedCourse.getCourseID());
         // Seçili kursu ve öğrenci objesini kontrol ediyoruz
         if (selectedCourse != null && student != null) {
             admin.removeStudentFromCourse(selectedCourse, student); // Admin sınıfındaki metodu çağırıyoruz
