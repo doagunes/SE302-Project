@@ -34,7 +34,11 @@ public class StudentManagementController {
 
         // Ensure that the student object is set before calling any methods that depend on it
         if (student != null) {
+            System.out.println(student);
             loadCourses();
+        }
+        if (student == null) {
+            System.out.println("student NULL");
         }
 
         // Set the button action to call the method when clicked
@@ -75,7 +79,8 @@ public class StudentManagementController {
 
         // Öğrencinin CourseTableView'inden seçili kursu alıyoruz
         Course selectedCourse = courseTableView.getSelectionModel().getSelectedItem();
-
+        System.out.println(selectedCourse + selectedCourse.getCourseID());
+        System.out.println(student.getCourses());
         // Seçili kursu ve öğrenci objesini kontrol ediyoruz
         if (selectedCourse != null && student != null) {
             admin.removeStudentFromCourse(selectedCourse, student); // Admin sınıfındaki metodu çağırıyoruz

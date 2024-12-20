@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AttendenceDatabase {
-    public static void dropTables () {
+    public static void dropTables() {
         String sql1 = "DROP TABLE IF EXISTS Students";
         try (Connection conn = DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement()) {
@@ -30,9 +30,10 @@ public class AttendenceDatabase {
             System.out.println("Deleting table error: " + e.getMessage());
         }
     }
+
     public static void createTables() {
 
-        //TODO Duplicate öğrenci probblem var
+        //TODO Duplicate öğrenci probblem var - SOLVED
         String sql = """
             CREATE TABLE IF NOT EXISTS Students (
                 student_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -71,12 +72,13 @@ public class AttendenceDatabase {
             System.out.println("Creating table error: " + e.getMessage());
         }
     }
+
     public static void addStudentsFromCSV() throws IOException {
         ArrayList<String> allStudents = CSV_Reader.readAllStudents();
         String sql = "INSERT INTO Students(student_name) VALUES (?)";
-        try(Connection conn = DatabaseConnection.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sql)){
-            for(String student : allStudents){
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            for (String student : allStudents) {
                 pstmt.setString(1, student);
                 pstmt.executeUpdate();        // Sorgu çalıştırılır
 
@@ -87,6 +89,7 @@ public class AttendenceDatabase {
         }
 
     }
+
     public static void addAttendancesWithInitialDatas() {
         String courseNamesQuery = "SELECT Course, Students FROM COURSE";
         Map<String, ArrayList<String>> courseAndStudentsMap = new HashMap<>();
@@ -131,9 +134,7 @@ public class AttendenceDatabase {
                         // Attendance kaydı ekle
                         insertStmt.setInt(1, studentId);
                         insertStmt.setString(2, studentName);
-                        System.out.println(studentName);
                         insertStmt.setString(3, courseName);
-                        System.out.println(courseName);
                         insertStmt.setInt(4, 0); // Başlangıç devamsızlık sayısı
                         insertStmt.executeUpdate();
                     } else {
@@ -146,6 +147,7 @@ public class AttendenceDatabase {
             throw new RuntimeException("Insertion error: " + e.getMessage(), e);
         }
     }
+
     private static ArrayList<String> stringToArrayList(String students) {
         ArrayList<String> studentList = new ArrayList<>();
         if (students != null && !students.isEmpty()) {
@@ -155,7 +157,7 @@ public class AttendenceDatabase {
         return studentList;
     }
 
-    public static ArrayList<String> studentsOfSpecificCourse (Course course) {
+    public static ArrayList<String> studentsOfSpecificCourse(Course course) {
         ArrayList<String> studentsOfCourse = new ArrayList<>();
 
         // SQL sorgusu
@@ -183,6 +185,7 @@ public class AttendenceDatabase {
 
         return studentsOfCourse;
     }
+
     public static ObservableList<AttendanceStudents> getAttendanceStudents() {
         ObservableList<AttendanceStudents> attendance_students = FXCollections.observableArrayList();
         try (Connection conn = DatabaseConnection.getConnection();
@@ -204,6 +207,47 @@ public class AttendenceDatabase {
         return attendance_students;
     }
 
+    public static int getAbsenceCount(Course course, Student student) throws SQLException {
+        int absenceCount = 0;
+        String studentName = student.getName();
+        String courseName = course.getCourseID();
+
+        String query = "SELECT absence_count FROM Attendance WHERE course_name = ? AND student_name = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, courseName);
+            pstmt.setString(2, studentName);
+
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                absenceCount = rs.getInt("absence_count");
+            }
 
 
+        }
+        return absenceCount;
+    }
+    public static void incrementAbsenceCount (Course course, Student student) {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+
+            // absence_count'u 1 artıran sorgu
+            String updateQuery = "UPDATE Attendance " +
+                    "SET absence_count = absence_count + 1 " +
+                    "WHERE student_name = ? AND course_name = ?";
+
+            PreparedStatement preparedStatement = conn.prepareStatement(updateQuery);
+
+            // Parametreleri ayarla
+            preparedStatement.setString(1, student.getName());
+            preparedStatement.setString(2, course.getCourseID());
+
+            preparedStatement.executeQuery();
+
+        } catch (SQLException e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        }
+    }
 }
+
+

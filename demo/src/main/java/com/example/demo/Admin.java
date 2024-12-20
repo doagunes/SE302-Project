@@ -4,6 +4,7 @@ import com.example.demo.Classroom;
 import com.example.demo.Course;
 import com.example.demo.Student;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +48,9 @@ public class Admin {
     }
 
     public void removeStudentFromCourse(Course course, Student student) {
+        System.out.println(student);
         if(student.getCourses().contains(course)) {
+            System.out.println("heyyyyyyyyooooooo");
             student.getCourses().remove(course);
             course.getEnrolledStudentsList().remove(student);
 
@@ -120,28 +123,28 @@ public class Admin {
         } else {
             System.out.println("Student " + student.getName() + " is present in course " + course.getCourseID());
         }
-        //TODO sql update
+        //TODO sql update - SANIRIM DOLAYLI YOLDAN ÇÖZÜLDÜ KULLANDIGI METHOT SQL UPDATE YAPTIGI İÇİN - BENHUR
     }
 
-    public void viewStudentAbsenteeism(Student student, Course course) {
+    public void viewStudentAbsenteeism(Student student, Course course) throws SQLException {
         // Öğrencinin o dersteki devamsızlık sayısını al
         int absenteeismCount = student.getAbsenceCountForCourse(course);
         System.out.println("Student " + student.getName() + " has " + absenteeismCount + " absences in course " + course.getCourseID());
     }
-    //TODO SQL getAttendence
+    //TODO SQL getAttendence - SOLVED - BENHUR
 
     //TODO viewStudentAbsenteeism methodunu kullansak daha iyi olmaz mı ilayda?
-    public void viewAllAbsenteeismForStudent2(Student student) {
+    public void viewAllAbsenteeismForStudent2(Student student) throws SQLException {
         System.out.println("Absenteeism details for student: " + student.getName());
         for (Course course : student.getCourses()) {
            viewStudentAbsenteeism(student,course);
         }
-        //TODO SQL spesifik öğrenci için devamsılık göstercek
+        //TODO SQL spesifik öğrenci için devamsılık göstercek - BU VE ALTTAKİ METHODLAR İÇİN SQL UPDATE YAPMADIM NO USAGE GÖSTERİYO ÇÜNKÜ KULLANILICAKSA BBUNLAR LÜTFEN HABER EDİN YAPARIM
     }
 
 
     // Öğrencinin tüm derslerdeki devamsızlıklarını görüntüleme
-    public void viewAllAbsenteeismForStudent(Student student) {
+    public void viewAllAbsenteeismForStudent(Student student) throws SQLException {
         System.out.println("Absenteeism details for student: " + student.getName());
         for (Course course : student.getCourses()) {
             int absenteeismCount = student.getAbsenceCountForCourse(course);
