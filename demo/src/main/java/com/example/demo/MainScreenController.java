@@ -139,6 +139,8 @@ public class MainScreenController {
 
         //yeni stage oluştur ve .fxml'i göster
         Stage stage = new Stage();
+        stage.setMinWidth(400);
+        stage.setMinHeight(400);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Course Management");
         stage.setScene(new Scene(root));
