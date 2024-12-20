@@ -57,6 +57,7 @@ public class StudentsController {
     private void handleStudentSelection(MouseEvent event) {
         // Get the selected student from the table
         selectedStudent = studentTableView.getSelectionModel().getSelectedItem();
+        StudentManagementController.student = selectedStudent;
 
         // If a student is selected, open the StudentManagement.fxml
         if (selectedStudent != null) {

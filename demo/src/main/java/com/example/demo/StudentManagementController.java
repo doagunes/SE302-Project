@@ -16,7 +16,7 @@ public class StudentManagementController {
     @FXML
     private Label studentNameLabel; // Label to display student name
 
-    private Student student; // Instance variable to hold the student object
+    public static Student student; // Instance variable to hold the student object
 
     @FXML
     private TableView<Course> courseTableView;
@@ -34,7 +34,11 @@ public class StudentManagementController {
 
         // Ensure that the student object is set before calling any methods that depend on it
         if (student != null) {
+            System.out.println(student);
             loadCourses();
+        }
+        if (student == null) {
+            System.out.println("student NULL");
         }
 
         // Set the button action to call the method when clicked
