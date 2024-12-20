@@ -111,18 +111,19 @@ public class CourseDataAccessObject {
         ObservableList<Course> coursesWithoutStudents = FXCollections.observableArrayList();
         String sql = "SELECT Course, TimeToStart, DurationInLectureHours, Lecturer FROM Course";
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
 
-                coursesWithoutStudents.add(new Course(rs.getString("Course"), rs.getString("TimeToStart"),
-                        rs.getInt("DurationInLectureHours"), rs.getString("Lecturer")));
+                coursesWithoutStudents.add(new Course(
+                        rs.getString("Course"),
+                        rs.getString("TimeToStart"),
+                        rs.getInt("DurationInLectureHours"),
+                        rs.getString("Lecturer")));
 
             }
-            for(Course course : coursesWithoutStudents){
-                System.out.println(course.toString());
-            }
+
 
         } catch (SQLException e) {
             System.out.println("Query error: " + e.getMessage());
