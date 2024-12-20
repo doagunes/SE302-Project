@@ -11,6 +11,16 @@ import javafx.util.Callback;
 
 import java.sql.*;
 import java.util.ArrayList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class ViewCoursesController {
 
@@ -35,6 +45,8 @@ public class ViewCoursesController {
 
     private ObservableList<Course> allCourses;
 
+    private Course selectedCourse;
+
     public void initialize() {
         // Sütunları yapılandır
         courseID.setCellValueFactory(new PropertyValueFactory<>("courseID"));
@@ -54,6 +66,34 @@ public class ViewCoursesController {
 
         // Reset butonuna işlem bağla
         resetButton.setOnAction(event -> resetTable());
+
+
+        tableView.setOnMouseClicked(this::handleCourseSelection);  // Course selection handler
+
+    }
+
+    // Event handler for when a course is clicked
+    @FXML
+    private void handleCourseSelection(MouseEvent event) {
+        // Get the selected course from the table
+        selectedCourse = tableView.getSelectionModel().getSelectedItem();
+
+        // Pass the selected course to StudentManagementController and close the window
+        if (selectedCourse != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("StudentManagement.fxml"));
+                Parent root = loader.load();  // Ensure the controller is loaded
+
+                StudentManagementController studentManagementController = loader.getController();
+
+                studentManagementController.handleAddToCourse(selectedCourse);
+
+                Stage stage = (Stage) tableView.getScene().getWindow();
+                stage.close();
+            } catch (IOException e) {
+                e.printStackTrace();  // Handle any exceptions that might occur during the loading of the FXML
+            }
+        }
     }
 
     private void searchCourse() {

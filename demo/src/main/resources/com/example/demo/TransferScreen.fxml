@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="538.0" prefWidth="878.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.TransferScreenController">
+   <children>
+      <TableView fx:id="courseTableView" onMouseClicked="#handleCourseSelection" prefHeight="510.0" prefWidth="330.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <columns>
+            <TableColumn fx:id="CoursesColumn" prefWidth="398.3999816894531" text="Courses" />
+         </columns>
+      </TableView>
+      <TableView fx:id="tableView" layoutX="330.0" onMouseClicked="#handleCourseSelection2" prefHeight="538.0" prefWidth="550.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <columns>
+            <TableColumn fx:id="courseID" prefWidth="144.79998779296875" text="courseId" />
+            <TableColumn fx:id="timeToStart" prefWidth="131.20001220703125" text="timeToStart" />
+            <TableColumn fx:id="duration" prefWidth="118.4000244140625" text="duration" />
+            <TableColumn fx:id="lecturerName" prefWidth="156.0" text="lecturerName" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>
