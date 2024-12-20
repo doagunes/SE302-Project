@@ -27,8 +27,8 @@ public class MainScreen extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         hostServices = getHostServices();
-        //FXMLLoader fxmlLoader = new FXMLLoader(MainScreen.class.getResource("MainScreen.fxml"));
-        FXMLLoader fxmlLoader = new FXMLLoader(MainScreen.class.getResource("Students.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainScreen.class.getResource("MainScreen.fxml"));
+        //FXMLLoader fxmlLoader = new FXMLLoader(MainScreen.class.getResource("Students.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load(), 1176, 875);
 

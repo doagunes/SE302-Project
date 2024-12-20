@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,14 +25,16 @@ public class Student extends Person{
         return student;
     }
 
-    public int getAbsenceCountForCourse(Course course) {
-        //TODO SQL'dan çekilcek veri
-        return absenceCountByCourse.getOrDefault(course, 0);
+    public int getAbsenceCountForCourse(Course course) throws SQLException {
+        //TODO SQL'dan çekilcek veri - SOLVED bi kontrol edin doğru mu yaptım - benhur
+        //return absenceCountByCourse.getOrDefault(course, 0);
+        return AttendenceDatabase.getAbsenceCount(course, this);
     }
 
     public void incrementAbsenteeismForCourse(Course course) {
         int currentCount = absenceCountByCourse.getOrDefault(course, 0);
         absenceCountByCourse.put(course, currentCount + 1);
+        AttendenceDatabase.incrementAbsenceCount(course, this); // TODO ADDED BY BENHUR
     }
 
     public void markAttendanceForCourse(Course course, boolean isPresent) {

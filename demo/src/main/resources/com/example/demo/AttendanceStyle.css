@@ -1,0 +1,74 @@
+/* Genel arka plan ve tableview ayarları */
+.root {
+    -fx-background-color: linear-gradient(to bottom, #1a1f36, #273a54); /* Lacivert ve mavi tonları */
+}
+
+/* Tablo */
+.table-view {
+    -fx-background-color: #1e2a38; /* Daha koyu lacivert */
+    -fx-border-color: #2a3f50; /* Koyu mavi çerçeve */
+    -fx-border-width: 2px;
+    -fx-table-cell-border-color: #2f4557;
+    -fx-padding: 10px;
+}
+
+/* Sütun başlıkları */
+.table-view .column-header-background {
+    -fx-background-color: #2e6045; /* Koyu yeşil tonları */
+}
+
+.table-view .column-header {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff; /* Beyaz yazı */
+    -fx-alignment: CENTER;
+}
+
+/* Tablo satırları */
+.table-row-cell {
+    -fx-background-color: #273a54; /* Hafif mavi tonları */
+    -fx-text-fill: #e0e6ed; /* Açık gri yazı */
+    -fx-border-color: #2f4557; /* Koyu mavi sınır */
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #1f2e43; /* Alternatif satır için daha koyu mavi */
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #3b5b47; /* Seçili satır için koyu yeşil */
+    -fx-text-fill: #ffffff; /* Beyaz yazı */
+}
+
+/* Tablo kenar çubuğu (scrollbar) */
+.scroll-bar {
+    -fx-background-color: #1a1f36; /* Lacivert */
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #2e6045; /* Koyu yeşil */
+    -fx-background-insets: 2;
+    -fx-background-radius: 5px;
+}
+
+/* Tablo hücre yazıları */
+.table-cell {
+    -fx-font-size: 13px;
+    -fx-text-fill: #e0e6ed; /* Hafif açık gri yazı */
+    -fx-padding: 5px;
+}
+
+/* Tablonun kenar boşlukları */
+.table-view:focused {
+    -fx-background-color: #1e2a38; /* Lacivert */
+    -fx-border-color: #2a3f50;
+    -fx-border-width: 2px;
+}
+
+/* Tooltip ayarları (eğer kullanılırsa) */
+.tooltip {
+    -fx-background-color: #2e6045; /* Koyu yeşil */
+    -fx-text-fill: #ffffff; /* Beyaz yazı */
+    -fx-font-size: 12px;
+    -fx-border-color: #1a1f36; /* Lacivert */
+}
