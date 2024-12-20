@@ -34,7 +34,7 @@ public class Student extends Person{
     public void incrementAbsenteeismForCourse(Course course) {
         int currentCount = absenceCountByCourse.getOrDefault(course, 0);
         absenceCountByCourse.put(course, currentCount + 1);
-        AttendenceDatabase.incrementAbsenceCount(course, this); // TODO ADDED BY BENHUR
+        //AttendenceDatabase.incrementAbsenceCount(course, this); // TODO ADDED BY BENHUR - NOT böyle bir method var AttendanceDatabaase'de ilaydaya sor!
     }
 
     public void markAttendanceForCourse(Course course, boolean isPresent) {

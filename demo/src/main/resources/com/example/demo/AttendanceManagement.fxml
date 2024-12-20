@@ -5,23 +5,35 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="555.0" prefWidth="748.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.AttendanceManagementController">
     <children>
-        <!-- Search bar -->
-        <TextField fx:id="searchBar" layoutX="50.0" layoutY="10.0" prefWidth="600.0" promptText="Search by Student Name or Course Name..." />
-
-        <!-- Table view -->
-        <TableView fx:id="tableView" layoutX="50.0" layoutY="50.0" prefHeight="400.0" prefWidth="600.0">
-            <columns>
-                <TableColumn fx:id="idColumn" prefWidth="100.0" text="Attendance ID" />
-                <TableColumn fx:id="studentIdColumn" prefWidth="100.0" text="Student ID" />
-                <TableColumn fx:id="studentNameColumn" prefWidth="150.0" text="Student Name" />
-                <TableColumn fx:id="courseNameColumn" prefWidth="100.0" text="Course Name" />
-                <TableColumn fx:id="absenceCountColumn" prefWidth="100.0" text="Absence Count" />
-                <!-- Yeni sütun: Increase Button -->
-                <TableColumn fx:id="actionColumn" prefWidth="150.0" text="Action" />
-            </columns>
-        </TableView>
+        <!-- Tüm içerik için bir StackPane kullan -->
+        <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <VBox alignment="CENTER" maxWidth="600.0" spacing="20.0">
+                <!-- Search bar -->
+                <HBox spacing="10.0">
+                    <children>
+                        <TextField fx:id="searchBar" prefHeight="25.0" promptText="Search by Student Name or Course Name..." HBox.hgrow="ALWAYS" />
+                        <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#searchBtnAction" prefHeight="25.0" text="Search" />
+                        <Button fx:id="clearBBtn" mnemonicParsing="false" onAction="#clearBtnAction" prefHeight="25.0" text="Clear" />
+                    </children>
+                </HBox>
+                <!-- Table view -->
+                <TableView fx:id="tableView" maxHeight="400.0" maxWidth="600.0" prefHeight="400.0" prefWidth="435.0">
+                    <columns>
+                        <TableColumn fx:id="idColumn" prefWidth="91.0" text="Attendance ID" />
+                        <TableColumn fx:id="studentIdColumn" prefWidth="72.0" text="Student ID" />
+                        <TableColumn fx:id="studentNameColumn" prefWidth="154.0" text="Student Name" />
+                        <TableColumn fx:id="courseNameColumn" prefWidth="92.0" text="Course Name" />
+                        <TableColumn fx:id="absenceCountColumn" prefWidth="89.0" text="Absence Count" />
+                        <TableColumn fx:id="actionColumn" prefWidth="79.0" text="Action" />
+                    </columns>
+                </TableView>
+            </VBox>
+        </StackPane>
     </children>
 </AnchorPane>

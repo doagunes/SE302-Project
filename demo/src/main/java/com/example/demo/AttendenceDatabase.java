@@ -228,7 +228,11 @@ public class AttendenceDatabase {
         }
         return absenceCount;
     }
-    public static void incrementAbsenceCount (Course course, Student student) {
+    public static void incrementAbsenceCount (AttendanceStudents attendanceStudents) {
+        String studentName = attendanceStudents.getStudentName();
+        String courseName = attendanceStudents.getCourseName();
+        System.out.println(studentName);
+        System.out.println(courseName);
         try (Connection conn = DatabaseConnection.getConnection()) {
 
             // absence_count'u 1 artıran sorgu
@@ -239,10 +243,10 @@ public class AttendenceDatabase {
             PreparedStatement preparedStatement = conn.prepareStatement(updateQuery);
 
             // Parametreleri ayarla
-            preparedStatement.setString(1, student.getName());
-            preparedStatement.setString(2, course.getCourseID());
+            preparedStatement.setString(1, studentName);
+            preparedStatement.setString(2, courseName);
 
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println("An error occurred: " + e.getMessage());
