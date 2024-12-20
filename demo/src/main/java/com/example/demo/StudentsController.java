@@ -7,10 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -28,13 +26,6 @@ public class StudentsController {
 
     private Student selectedStudent;  // Instance variable to hold the selected student
 
-    @FXML
-    private TextField searchField; // Arama kutusu
-    @FXML
-    private Button searchButton;  // Arama butonu
-    @FXML
-    private Button resetButton;   // Reset butonu
-
     public void initialize() {
         studentNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 
@@ -47,12 +38,6 @@ public class StudentsController {
 
         // Add listener to handle row selection
         studentTableView.setOnMouseClicked(this::handleStudentSelection);
-
-        // Arama butonuna işlem bağla
-        searchButton.setOnAction(event -> searchStudent());
-
-        // Reset butonuna işlem bağla
-        resetButton.setOnAction(event -> resetTable());
     }
 
     private ArrayList<Student> fetchStudentsFromDatabase() {
@@ -72,6 +57,9 @@ public class StudentsController {
     private void handleStudentSelection(MouseEvent event) {
         // Get the selected student from the table
         selectedStudent = studentTableView.getSelectionModel().getSelectedItem();
+        selectedStudent.getCourses().addAll(CourseDataAccessObject.getCoursesBasedOnStudent(selectedStudent.getName()));
+        System.out.println(selectedStudent.getCourses().get(1));
+        StudentManagementController.student = selectedStudent;
 
         // If a student is selected, open the StudentManagement.fxml
         if (selectedStudent != null) {
@@ -97,29 +85,4 @@ public class StudentsController {
             }
         }
     }
-
-    private void searchStudent() {
-        String searchQuery = searchField.getText();
-        if (searchQuery == null || searchQuery.trim().isEmpty()) {
-            studentTableView.setItems(studentTableView.getItems()); // If the search field is empty, show all students
-            return;
-        }
-
-        ObservableList<Student> filteredStudents = FXCollections.observableArrayList();
-
-        for (Student student : studentTableView.getItems()) {
-            if (student.getName().equalsIgnoreCase(searchQuery)) {
-                filteredStudents.add(student);
-            }
-        }
-
-        studentTableView.setItems(filteredStudents);
-    }
-
-    private void resetTable() {
-        searchField.clear(); // Clear the search field
-        studentTableView.setItems(FXCollections.observableArrayList(fetchStudentsFromDatabase())); // Reload all students
-    }
-
-
 }

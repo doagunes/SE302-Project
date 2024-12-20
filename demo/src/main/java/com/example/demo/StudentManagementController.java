@@ -16,7 +16,7 @@ public class StudentManagementController {
     @FXML
     private Label studentNameLabel; // Label to display student name
 
-    private Student student; // Instance variable to hold the student object
+    public static Student student; // Instance variable to hold the student object
 
     @FXML
     private TableView<Course> courseTableView;
