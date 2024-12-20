@@ -4,6 +4,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Objects;
 
 public class Course {
     private String courseID;
@@ -94,9 +95,9 @@ public class Course {
         assignedClassroom.getCourses().add(this);
 
         // Test için log yazdır
-        System.out.println(this.getCourseID() + ": Assigned to " + assignedClassroom.getClassroomName() +
-                " (Capacity: " + assignedClassroom.getCapacity() + ")");
-        System.out.println(this.getCourseDay() + " " + this.getStartTime() + " - " + this.getEndTime(this.getStartTime()));
+        //System.out.println(this.getCourseID() + ": Assigned to " + assignedClassroom.getClassroomName() +
+        //        " (Capacity: " + assignedClassroom.getCapacity() + ")");
+        //System.out.println(this.getCourseDay() + " " + this.getStartTime() + " - " + this.getEndTime(this.getStartTime()));
     }
 
     //TODO: BU CREATELER SİLİNEBİLİR :o
@@ -109,9 +110,9 @@ public class Course {
 
         if (!courseExists) {
             lecturer.getCourses().add(this);
-            System.out.println(lecturerName + " " + this.getCourseID() + " dersine eklendi.");
+            //System.out.println(lecturerName + " " + this.getCourseID() + " dersine eklendi.");
         } else {
-            System.out.println(this.getCourseID() + " dersi zaten hocanın ders listesinde.");
+           // System.out.println(this.getCourseID() + " dersi zaten hocanın ders listesinde.");
         }
     }
 
@@ -125,13 +126,27 @@ public class Course {
 
             if (!courseExists) {
                 student.getCourses().add(this); // Öğrenciye dersi ekle
-                System.out.println(studentName + " " + this.getCourseID() + " dersine eklendi.");
+                //System.out.println(studentName + " " + this.getCourseID() + " dersine eklendi.");
             } else {
-                System.out.println(this.getCourseID() + " dersi zaten " + studentName + "'in ders listesinde.");
+                //System.out.println(this.getCourseID() + " dersi zaten " + studentName + "'in ders listesinde.");
             }
             this.enrolledStudentsList.add(student);
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Course course = (Course) obj;
+        return courseID.equals(course.courseID); // Burada yalnızca courseID'yi karşılaştırmak yeterli olabilir
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(courseID); // Burada da courseID'yi kullanmak yeterlidir
+    }
+
 
     public LocalTime getEndTime(LocalTime startTime) {
         int totalDuration = duration * 45 + (duration - 1) * 10;
@@ -227,6 +242,7 @@ public class Course {
         this.enrolledStudentsList = enrolledStudentsList;
     }
 
+    /*
     @Override
     public String toString() {
         return "Course{" +
@@ -236,6 +252,8 @@ public class Course {
                ", lecturerName='" + lecturerName +
                '}';
     }
+
+     */
 
     public ArrayList<Attendance> getAttendanceRecordList() {
         return attendanceRecordList;
