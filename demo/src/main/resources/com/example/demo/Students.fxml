@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="570.0" prefWidth="787.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.StudentsController">
+   <children>
+      <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="34.0" prefWidth="693.0" text="Student List" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="94.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <TableView fx:id="studentTableView" prefHeight="530.0" prefWidth="787.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+        <columns>
+          <TableColumn fx:id="studentNameColumn" prefWidth="152.79999387264252" text="Student Names" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
