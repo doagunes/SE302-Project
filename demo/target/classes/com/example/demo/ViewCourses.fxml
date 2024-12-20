@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.collections.*?>
-<?import javafx.fxml.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<GridPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ViewCoursesController">
+<GridPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="com.example.demo.ViewCoursesController">
     <columnConstraints>
         <ColumnConstraints hgrow="ALWAYS" />
         <ColumnConstraints hgrow="ALWAYS" />
@@ -15,27 +18,25 @@
     <rowConstraints>
         <RowConstraints vgrow="ALWAYS" />
         <RowConstraints vgrow="ALWAYS" />
+      <RowConstraints />
     </rowConstraints>
 
-    <!-- Başlık -->
-    <Text text="Course List" GridPane.columnSpan="2" GridPane.rowIndex="0" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
-
     <!-- Arama Alanı -->
-    <HBox spacing="10" GridPane.rowIndex="1" GridPane.columnSpan="2" alignment="CENTER_LEFT">
-        <Label text="Search:"/>
-        <TextField fx:id="searchField" promptText="Enter course ID"/>
+    <HBox alignment="CENTER_LEFT" spacing="10" GridPane.columnSpan="2" GridPane.rowIndex="1">
+        <Label text="Search:" />
+        <TextField fx:id="searchField" promptText="Enter course ID" />
         <Button fx:id="searchButton" text="Search" />
         <Button fx:id="resetButton" text="Reset" />
     </HBox>
 
     <!-- TableView -->
-    <TableView fx:id="tableView" GridPane.rowIndex="2" GridPane.columnSpan="2" prefHeight="400">
+    <TableView fx:id="tableView" prefHeight="400" GridPane.columnSpan="2" GridPane.rowIndex="2">
         <columns>
-            <TableColumn fx:id="courseID" text="Course ID" prefWidth="150"/>
-            <TableColumn fx:id="timeToStart" text="Time To Start" prefWidth="150"/>
-            <TableColumn fx:id="duration" text="Duration" prefWidth="150"/>
-            <TableColumn fx:id="lecturerName" text="Lecturer Name" prefWidth="150"/>
-            <TableColumn fx:id="viewStudentsColumn" text="View Students" prefWidth="150"/>
+            <TableColumn fx:id="courseID" prefWidth="150" text="Course ID" />
+            <TableColumn fx:id="timeToStart" prefWidth="150" text="Time To Start" />
+            <TableColumn fx:id="duration" prefWidth="150" text="Duration" />
+            <TableColumn fx:id="lecturerName" prefWidth="150" text="Lecturer Name" />
+            <TableColumn fx:id="viewStudentsColumn" prefWidth="150" text="View Students" />
         </columns>
     </TableView>
 </GridPane>
