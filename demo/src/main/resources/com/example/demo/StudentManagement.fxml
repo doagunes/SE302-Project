@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.StudentManagementController">
+    <GridPane gridLinesVisible="true" hgap="10" layoutX="14.0" layoutY="41.0" prefHeight="593.0" prefWidth="440.0" style="-fx-padding: 10;" vgap="10">
+        <columnConstraints>
+            <ColumnConstraints maxWidth="98.8000244140625" minWidth="50.0" prefWidth="30.0" />
+            <ColumnConstraints maxWidth="130.00000610351563" minWidth="50.0" prefWidth="70.0" />
+            <ColumnConstraints maxWidth="128.40000000000003" minWidth="50.0" prefWidth="70.0" />
+            <ColumnConstraints maxWidth="135.80002441406248" minWidth="50.0" prefWidth="70.0" />
+            <ColumnConstraints maxWidth="148.99997558593748" minWidth="50.0" prefWidth="70.0" />
+            <ColumnConstraints maxWidth="135.0" minWidth="50.0" prefWidth="70.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="216.60000610351562" minHeight="20.0" prefHeight="30.0" />
+            <RowConstraints maxHeight="187.99998321533207" minHeight="20.0" prefHeight="30.0" />
+            <RowConstraints maxHeight="181.5999816894531" minHeight="20.0" prefHeight="30.0" />
+            <RowConstraints maxHeight="160.7999938964844" minHeight="20.0" prefHeight="30.0" />
+            <RowConstraints maxHeight="158.39999999999998" minHeight="20.0" prefHeight="30.0" />
+            <RowConstraints maxHeight="138.39999999999998" minHeight="20.0" prefHeight="30.0" />
+            <RowConstraints maxHeight="126.39999999999998" minHeight="20.0" prefHeight="30.0" />
+            <RowConstraints maxHeight="112.79999389648441" minHeight="20.0" prefHeight="30.0" />
+            <RowConstraints maxHeight="100.80002441406248" minHeight="20.0" prefHeight="30.0" />
+            <RowConstraints maxHeight="88.79996337890623" minHeight="20.0" prefHeight="30.0" />
+            <RowConstraints maxHeight="73.60001220703123" minHeight="20.0" prefHeight="30.0" />
+            <RowConstraints maxHeight="70.39999999999998" minHeight="20.0" prefHeight="30.0" />
+            <RowConstraints maxHeight="73.59995117187498" minHeight="20.0" prefHeight="30.0" />
+            <RowConstraints maxHeight="63.99997558593748" minHeight="20.0" prefHeight="30.0" />
+            <RowConstraints maxHeight="45.60001220703123" minHeight="20.0" prefHeight="30.0" />
+        </rowConstraints>
+        <Label style="-fx-font-weight: bold;" text="Monday" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Label style="-fx-font-weight: bold;" text="Tuesday" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+        <Label style="-fx-font-weight: bold;" text="Wednesday" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+        <Label style="-fx-font-weight: bold;" text="Thursday" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+        <Label style="-fx-font-weight: bold;" text="Friday" GridPane.columnIndex="5" GridPane.rowIndex="0" />
+        <Label text="08:30" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label text="09:25" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <Label text="10:20" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <Label text="11:15" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <Label text="12:10" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <Label text="13:05" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+        <Label text="14:00" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+        <Label text="14:55" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+        <Label text="15:50" GridPane.columnIndex="0" GridPane.rowIndex="9" />
+        <Label text="16:45" GridPane.columnIndex="0" GridPane.rowIndex="10" />
+        <Label text="17:40" GridPane.columnIndex="0" GridPane.rowIndex="11" />
+        <Label text="18:35" GridPane.columnIndex="0" GridPane.rowIndex="12" />
+        <Label text="19:30" GridPane.columnIndex="0" GridPane.rowIndex="13" />
+        <Label text="20:25" GridPane.columnIndex="0" GridPane.rowIndex="14" />
+    </GridPane>
+    <TableView fx:id="courseTableView" layoutX="462.0" layoutY="247.0" prefHeight="377.0" prefWidth="399.0">
+        <columns>
+            <TableColumn fx:id="CoursesColumn" prefWidth="398.3999816894531" text="Courses" />
+        </columns>
+    </TableView>
+    <Button layoutX="462.0" layoutY="54.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="399.0" text="AddStudentToCourse" />
+    <Button fx:id="removeStudentButton" layoutX="462.0" layoutY="116.0" mnemonicParsing="false" onAction="#handleRemoveStudentFromCourse" prefHeight="53.0" prefWidth="399.0" text="RemoveStudentFromCourse" />
+    <Button layoutX="462.0" layoutY="181.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="399.0" text="TransferStudentToAnotherCourse" />
+    <Label fx:id="studentNameLabel" alignment="CENTER" layoutX="-3.0" layoutY="-5.0" prefHeight="18.0" prefWidth="861.0" text="studentNameLabel" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <font>
+            <Font size="16.0" />
+        </font>
+    </Label>
+</AnchorPane>

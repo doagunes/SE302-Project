@@ -4,6 +4,7 @@ import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -276,5 +277,29 @@ public class CourseDataAccessObject {
         }
     }
 
+    public static ArrayList<String> getAllStudents() {
+        ArrayList<String> allStudents = new ArrayList<>();
+        String sql = "SELECT Students FROM Course";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                String studentsString = rs.getString("Students");
+                ArrayList<String> studentsInCourse = stringToArrayList(studentsString);
+                for (String student : studentsInCourse) {
+                    if (!allStudents.contains(student)) {
+                        allStudents.add(student);
+                    }
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Query error: " + e.getMessage());
+        }
+
+        return allStudents;
+    }
 
 }
