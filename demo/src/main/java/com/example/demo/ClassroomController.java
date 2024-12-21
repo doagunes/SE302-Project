@@ -16,7 +16,7 @@ public class ClassroomController {
 
     public void initialize() {
         setupLabels();
-        populateCourses();
+        //populateCourses();
     }
 
     // Günler ve saatler için grid başlıklarını ayarla

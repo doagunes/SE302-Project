@@ -322,5 +322,30 @@ public class CourseDataAccessObject {
 
         return lecturers;
     }
+    public static Course getCourseByCourseID(String courseID){
+        Course course = null;
+        String sql = "SELECT * FROM Course WHERE Course = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+
+             ) {
+
+            pstmt.setString(1, courseID);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                ArrayList<String> studentsInCourse = new ArrayList<>();
+                String studentsString = rs.getString("Students");
+                studentsInCourse = stringToArrayList(studentsString);
+                course = new Course(rs.getString("Course"), rs.getString("TimeToStart"),
+                        rs.getInt("DurationInLectureHours"), rs.getString("Lecturer"), studentsInCourse);
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Query error: " + e.getMessage());
+        }
+        return course;
+    }
 
 }
