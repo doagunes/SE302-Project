@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.demo.LecturerScheduleController"
+            prefHeight="600.0" prefWidth="800.0">
+    <children>
+        <GridPane fx:id="scheduleGrid" layoutX="50.0" layoutY="50.0" gridLinesVisible="true">
+            <columnConstraints>
+                <!-- Günler için genişlik ayarı -->
+                <ColumnConstraints minWidth="100.0" />
+                <ColumnConstraints minWidth="100.0" />
+                <ColumnConstraints minWidth="100.0" />
+                <ColumnConstraints minWidth="100.0" />
+                <ColumnConstraints minWidth="100.0" />
+                <ColumnConstraints minWidth="100.0" />
+                <ColumnConstraints minWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <!-- Saatler için yükseklik ayarı -->
+                <RowConstraints minHeight="40.0" />
+                <RowConstraints minHeight="40.0" />
+                <RowConstraints minHeight="40.0" />
+                <RowConstraints minHeight="40.0" />
+                <RowConstraints minHeight="40.0" />
+                <RowConstraints minHeight="40.0" />
+                <RowConstraints minHeight="40.0" />
+                <RowConstraints minHeight="40.0" />
+                <RowConstraints minHeight="40.0" />
+                <RowConstraints minHeight="40.0" />
+                <RowConstraints minHeight="40.0" />
+            </rowConstraints>
+        </GridPane>
+    </children>
+</AnchorPane>
