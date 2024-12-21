@@ -16,10 +16,15 @@ public class BenhurTest {
 
          */
 
+        /*
         AttendenceDatabase.dropTables();
         AttendenceDatabase.createTables();
         AttendenceDatabase.addStudentsFromCSV();
         AttendenceDatabase.addAttendancesWithInitialDatas();
+
+         */
+
+        AssignCourseClassroomDB.createTables();
 
 
 

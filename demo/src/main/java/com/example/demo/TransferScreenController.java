@@ -20,6 +20,7 @@ import java.util.ArrayList;
 public class TransferScreenController {
 
     public static Student student; // Instance variable to hold the student object
+    public StudentManagementController studentManagementController;
 
     @FXML
     private TableView<Course> courseTableView;
@@ -121,8 +122,11 @@ public class TransferScreenController {
         // Pass the selected course to StudentManagementController and close the window
         if (selectedCourse2 != null) {
             try {
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("StudentManagement.fxml"));
                 Parent root = loader.load();  // Ensure the controller is loaded
+
+
 
                 StudentManagementController studentManagementController = loader.getController();
 
@@ -134,6 +138,11 @@ public class TransferScreenController {
                 e.printStackTrace();  // Handle any exceptions that might occur during the loading of the FXML
             }
         }
+    }
+
+    @FXML
+    public void setStudentManagamentController (StudentManagementController studentManagementController) {
+        this.studentManagementController = studentManagementController;
     }
 
 }

@@ -93,6 +93,7 @@ public class Course {
         // Sınıfı ata ve kursu sınıfın ders listesine ekle
         this.assignedClassroom = assignedClassroom;
         assignedClassroom.getCourses().add(this);
+        AssignCourseClassroomDB.initializeAssigning(this, assignedClassroom);
 
         // Test için log yazdır
         //System.out.println(this.getCourseID() + ": Assigned to " + assignedClassroom.getClassroomName() +
