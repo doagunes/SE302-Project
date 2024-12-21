@@ -72,26 +72,6 @@ public class ViewLecturersController {
         viewScheduleColumn.setCellFactory(cellFactory);
     }
 
-    private void showScheduleForLecturer(String lecturer) {
-        try {
-            // Yeni bir sahne aç
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewLecturerSchedule.fxml"));
-            StackPane root = loader.load();
-
-            // LecturerScheduleController'a öğretim üyesi adını ilet
-            LecturerScheduleController controller = loader.getController();
-            controller.setLecturerName(lecturer);
-
-            Scene scheduleScene = new Scene(root);
-            Stage scheduleStage = new Stage();
-            scheduleStage.setTitle("Schedule for " + lecturer);
-            scheduleStage.setScene(scheduleScene);
-            scheduleStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     private void openSchedule(String selectedLecturer)  {
         LecturerScheduleController.setLecturerName(selectedLecturer);
         System.out.println(LecturerScheduleController.lecturer);
@@ -102,6 +82,7 @@ public class ViewLecturersController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
         //yeni stage oluştur ve .fxml'i göster
         Stage stage = new Stage();
 

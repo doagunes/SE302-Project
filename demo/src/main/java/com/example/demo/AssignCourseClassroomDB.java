@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -107,5 +110,42 @@ public class AssignCourseClassroomDB {
         }
         return studentList;
     }
+    public static ArrayList<VBox> getAssign (ArrayList<Course> courses) {
+        ArrayList<Course> courseArrayList = new ArrayList<>();
+        ArrayList<VBox> vBoxes = new ArrayList<>();
+        //TODO ne döndürcez?
+        courseArrayList = courses;
+
+        for (Course course : courseArrayList) {
+            // SQL sorgusu
+            String query = "SELECT * FROM Assign WHERE course_id = ?";
+            try (Connection conn = DatabaseConnection.getConnection();
+                 PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+
+                // Parametreyi ayarla
+                preparedStatement.setString(1, course.getCourseID());
+
+                // Sorguyu çalıştır ve sonuçları işle
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+
+                    Label courseLabel = new Label(resultSet.getString(1));
+                    Label classroomLabel = new Label(resultSet.getString(2));
+                    VBox vbox = new VBox();
+                    vbox.setSpacing(10); // Etiketler arasında 10 piksel boşluk
+                    vbox.getChildren().addAll(courseLabel, classroomLabel);
+                    vBoxes.add(vbox);
+
+                }
+
+            } catch (SQLException e) {
+                System.out.println("An error occurred while fetching courses: " + e.getMessage());
+            }
+        }
+
+        return vBoxes;
+
+    }
+
 
 }

@@ -11,7 +11,7 @@ import java.util.List;
 public class LecturerScheduleController {
 
     @FXML
-    private static GridPane scheduleGrid;
+    private GridPane scheduleGrid = new GridPane();
     @FXML
     private static Label lecturerNameLabel;
 
@@ -21,7 +21,6 @@ public class LecturerScheduleController {
     public static void setLecturerName(String lecturerName) {
         lecturer = lecturerName;
         //lecturerNameLabel.setText(lecturerName); // Öğretim üyesi adını etiketle güncelle
-        populateCourses();
     }
 
 
@@ -49,26 +48,34 @@ public class LecturerScheduleController {
     }
 
     // Dersleri GridPane'e ekle
-    private static void populateCourses() {
+    private void populateCourses() {
         if (lecturer == null) {
             System.out.println("No lecturer selected.");
             return;
         }
 
         // Veritabanından dersleri al
-        List<Course> courses = CourseDataAccessObject.getCourseWhereLecturerIs(lecturer);
-        System.out.println(courses.get(0).getCourseID());
+        ArrayList<VBox> vBoxes = AssignCourseClassroomDB.getAssign(CourseDataAccessObject.getCourseWhereLecturerIs(lecturer));
         //O Classroom'un course'larını aldık!
 
-        for (Course course : courses) {
-            int col = getDayColumnIndex(course.getCourseDay());
-            int row = getTimeRowIndex(course.getStartTime().toString());
+        for (VBox vbox : vBoxes) {
+            Course currentCourse;
+            Label courseIDLabel = (Label) vbox.getChildren().get(0);
+            String courseID = courseIDLabel.getText();
+            currentCourse = CourseDataAccessObject.getCourseByCourseID(courseID);
 
+
+            int col = getDayColumnIndex(currentCourse.getCourseDay());
+            int row = getTimeRowIndex(currentCourse.getStartTime().toString());
+
+            /*
             Label courseLabel = new Label(course.getCourseID());
             Label classroomLabel = new Label(course.getAssignedClassroom().getClassroomName());
             VBox vbox = new VBox();
             vbox.setSpacing(10); // Etiketler arasında 10 piksel boşluk
             vbox.getChildren().addAll(courseLabel, classroomLabel);
+
+             */
             scheduleGrid.add(vbox, col, row);
 
         }
