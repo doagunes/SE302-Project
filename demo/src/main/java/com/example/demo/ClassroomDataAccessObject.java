@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -96,6 +99,23 @@ public class ClassroomDataAccessObject {
             System.out.println("Query error: " + e.getMessage());
         }
         return capacity;
+    }
+
+    public static ObservableList<Classroom> getClassroomsForGUI() {
+        ObservableList<Classroom> allClassroom = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM Classroom";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+
+                allClassroom.add(new Classroom(rs.getString("Classroom"), rs.getInt("Capacity")));
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Query error: " + e.getMessage());
+        }
+        return  allClassroom;
     }
 
 }

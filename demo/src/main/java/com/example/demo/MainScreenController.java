@@ -117,13 +117,14 @@ public class MainScreenController {
     }
     @FXML
     private void startClassroomPage () throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ClassroomsManagement.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ClassroomManagement.fxml"));
         Parent root = fxmlLoader.load();
-
-
 
         //yeni stage oluştur ve .fxml'i göster
         Stage stage = new Stage();
+
+        stage.setMinWidth(400);
+        stage.setMinHeight(400);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Course Management");
         stage.setScene(new Scene(root));
@@ -149,6 +150,7 @@ public class MainScreenController {
     }
 
 
+    /*
     @FXML
     private void startStudentManagementPage () throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Students.fxml"));
@@ -162,5 +164,7 @@ public class MainScreenController {
         stage.showAndWait();
 
     }
+
+     */
 
 }
