@@ -3,9 +3,16 @@ package com.example.demo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ViewLecturersController {
@@ -42,8 +49,10 @@ public class ViewLecturersController {
 
                     {
                         btn.setOnAction(event -> {
-                            String selectedLecturer = getTableView().getItems().get(getIndex());
-                            showScheduleForLecturer(selectedLecturer);
+                            int index = getIndex();
+                            String selectedLecturer = getTableView().getItems().get(index);
+                            openSchedule(selectedLecturer);
+
                         });
                     }
 
@@ -64,7 +73,43 @@ public class ViewLecturersController {
     }
 
     private void showScheduleForLecturer(String lecturer) {
-        // Burada, seçilen öğretim üyesinin ders programını göstermek için gerekli işlemi yapabilirsiniz
-        System.out.println("Showing schedule for " + lecturer);
+        try {
+            // Yeni bir sahne aç
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewLecturerSchedule.fxml"));
+            StackPane root = loader.load();
+
+            // LecturerScheduleController'a öğretim üyesi adını ilet
+            LecturerScheduleController controller = loader.getController();
+            controller.setLecturerName(lecturer);
+
+            Scene scheduleScene = new Scene(root);
+            Stage scheduleStage = new Stage();
+            scheduleStage.setTitle("Schedule for " + lecturer);
+            scheduleStage.setScene(scheduleScene);
+            scheduleStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void openSchedule(String selectedLecturer)  {
+        LecturerScheduleController.setLecturerName(selectedLecturer);
+        System.out.println(LecturerScheduleController.lecturer);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ViewLecturerSchedule.fxml"));
+        Parent root = null;
+        try {
+            root = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        //yeni stage oluştur ve .fxml'i göster
+        Stage stage = new Stage();
+
+        stage.setMinWidth(400);
+        stage.setMinHeight(400);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Schedule");
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
     }
 }
